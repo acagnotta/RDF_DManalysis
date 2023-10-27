@@ -45,7 +45,26 @@ float deltaR(float eta1, float phi1, float eta2, float phi2){
   return hypot(eta1 - eta2, deltaPhi(phi1, phi2)); 
 }
 
-// -------------> 2018 data HEM
+
+// ########################################################
+// ############## Un/Ov flow bin ##########################
+// ########################################################
+
+float UnOvBin(float var, int bins, float xmin, float xmax){ 
+  float fvar;
+  float half_step = ((xmax-xmin)/bins)/2; 
+
+  if(var>=xmax) fvar = xmax-half_step;
+  else if(var<=xmin) fvar = xmin+half_step;
+  else fvar = var; 
+
+  return fvar;
+}
+
+// ########################################################
+// ############## Data2018 ################################
+// ########################################################
+
 bool hemveto(rvec_f Jet_eta, rvec_f Jet_phi, rvec_f Electron_eta, rvec_f Electron_phi){
   float hemvetoetaup = -3.05;
   float hemvetoetadown = -1.35;
@@ -65,13 +84,19 @@ bool hemveto(rvec_f Jet_eta, rvec_f Jet_phi, rvec_f Electron_eta, rvec_f Electro
   }
   return passesMETHEMVeto; 
 }
+
 int w_nominalhemveto(float w_nominal, bool HEMVeto){
   int w_nominal_update = w_nominal;
   if (HEMVeto == false){
-    w_nominal_update = w_nominal * 0.354;
+    // w_nominal_update = w_nominal * 0.354;
+    w_nominal_update = w_nominal * 0.932;
   }
   return w_nominal_update;
 }
+
+// ########################################################
+// ############## TT correction ###########################
+// ########################################################
 
 bool tt_mtt_doublecounting(rvec_f GenPart_pdgId, rvec_f GenPart_pt, rvec_f GenPart_eta, rvec_f GenPart_phi, rvec_f GenPart_mass){ 
   TLorentzVector top;
@@ -93,25 +118,10 @@ bool tt_mtt_doublecounting(rvec_f GenPart_pdgId, rvec_f GenPart_pt, rvec_f GenPa
   return pass;
 }
 
-// // ttbar overlap
-// if ("TT" in sample.label): 
-//     genpart = Collection(event,"GenPart")
-//     top = list(filter(lambda x: x.pdgId==6 ,genpart))[0]
-//     antitop = list(filter(lambda x: x.pdgId==-6 ,genpart))[0]
-//     Mtt = (top.p4() + antitop.p4()).M()
-//     SF_t = 0.973-0.000134*top.pt+0.103*math.exp(-0.0118*top.pt)
-//     SF_antit = 0.973-0.000134*antitop.pt+0.103*math.exp(-0.0118*antitop.pt)
-//     w_pt_nominal[0]=math.sqrt(SF_t*SF_antit)
-//     if (Mtt>=700) and (not "Mtt" in sample.label):
-//         #print(Mtt)
-//         continue
+// ########################################################
+// ########## PRESELECTION ################################
+// ########################################################
 
-
-
-
-
-
-// ########## ad hoc functions
 bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_mvaFall17V1Iso_WPL, rvec_f Muon_pt, rvec_f Muon_eta, rvec_b Muon_looseId )
 {
   int EleVetoPassed = 0;
@@ -120,7 +130,7 @@ bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_mvaFall17V
   
   for (size_t i = 0; i < Muon_pt.size(); i++) 
     {
-      if(Electron_mvaFall17V1Iso_WPL[i]==1 && Electron_pt[i] > 30.) EleVetoPassed+=1;
+      if(Electron_mvaFall17V1Iso_WPL[i]==1 && Electron_pt[i] > 30. && abs(Electron_eta[i])<2.4) EleVetoPassed+=1;
     }
   for (size_t i = 0; i< Muon_pt.size(); i++)
     {
@@ -144,6 +154,35 @@ RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_i Jet_jetId)
   return ids;
 }
 
+bool atLeast1verygoodjet(rvec_i GoodJet_idx, rvec_f Jet_pt, rvec_f Jet_eta)
+{
+  bool pass = false;
+  for(int i = 0; i < GoodJet_idx.size(); i++)
+  {
+    if (Jet_pt[GoodJet_idx[i]]>30 && abs(Jet_eta[GoodJet_idx[i]])<4) 
+    {
+      pass = true;
+    }
+  }
+  return pass;
+}
+
+bool atLeast1verygoodfatjet(rvec_f FatJet_pt, rvec_f FatJet_msoftdrop)
+{
+  bool pass = false;
+  for(int i = 0; i < FatJet_pt.size(); i++)
+  {
+    if (FatJet_pt[i]>200 && FatJet_msoftdrop[i]>40) 
+    {
+      pass = true;
+    }
+  }
+  return pass;
+}
+
+// ########################################################
+// ############## MC/data comparison vars #################
+// ########################################################
 
 Float_t LeadingJetPt(rvec_i GoodJet_idx, rvec_f Jet_pt)
 {
@@ -181,6 +220,10 @@ Int_t njetbtag(rvec_i GoodJet_idx, rvec_f Jet_btagDeepFlavB)
   }
   return nbjet;
 }
+
+// ########################################################
+// ############## TopSelection ############################
+// ########################################################
 
 RVec<int> select_TopMer(rvec_f FatJet_deepTag_TvsQCD, rvec_f FatJet_pt, rvec_f FatJet_eta, rvec_f FatJet_phi)
 {
