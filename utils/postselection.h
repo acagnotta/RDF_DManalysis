@@ -45,7 +45,6 @@ float deltaR(float eta1, float phi1, float eta2, float phi2){
   return hypot(eta1 - eta2, deltaPhi(phi1, phi2)); 
 }
 
-
 // ########################################################
 // ############## Un/Ov flow bin ##########################
 // ########################################################
@@ -119,18 +118,30 @@ bool tt_mtt_doublecounting(rvec_f GenPart_pdgId, rvec_f GenPart_pt, rvec_f GenPa
 }
 
 // ########################################################
+// ############## MET_HLT_filter ##########################
+// ########################################################
+
+bool MET_HLT_filter(bool HLT_PFMET120_PFMHT120_IDTight, bool HLT_PFMETNoMu120_PFMHTNoMu120_IDTight, bool flag_goodVertices, bool flag_globalSuperTightHalo2016Filter, bool flag_HBHENoiseFilter, bool flag_HBHENoiseIsoFilter, bool flag_EcalDeadCellTriggerPrimitiveFilter, bool flag_BadPFMuonFilter, bool flag_ecalBadCalibFilter, bool flag_eeBadScFilter){
+  
+  bool good_HLT = HLT_PFMET120_PFMHT120_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight;
+  bool good_MET = flag_goodVertices && flag_globalSuperTightHalo2016Filter && flag_HBHENoiseFilter && flag_HBHENoiseIsoFilter && flag_EcalDeadCellTriggerPrimitiveFilter && flag_BadPFMuonFilter && flag_ecalBadCalibFilter && flag_eeBadScFilter;
+  return good_HLT && good_MET;
+  
+}
+
+// ########################################################
 // ########## PRESELECTION ################################
 // ########################################################
 
-bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_mvaFall17V1Iso_WPL, rvec_f Muon_pt, rvec_f Muon_eta, rvec_b Muon_looseId )
+bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased, rvec_f Muon_pt, rvec_f Muon_eta, rvec_b Muon_looseId )
 {
   int EleVetoPassed = 0;
   int MuVetoPassed = 0;
   bool IsLepVetoPassed = true;
   
-  for (size_t i = 0; i < Muon_pt.size(); i++) 
+  for (size_t i = 0; i < Electron_pt.size(); i++) 
     {
-      if(Electron_mvaFall17V1Iso_WPL[i]==1 && Electron_pt[i] > 30. && abs(Electron_eta[i])<2.4) EleVetoPassed+=1;
+      if(Electron_cutBased[i]>=1 && Electron_pt[i] > 30. && abs(Electron_eta[i])<2.5) EleVetoPassed+=1;
     }
   for (size_t i = 0; i< Muon_pt.size(); i++)
     {
@@ -146,7 +157,7 @@ RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_i Jet_jetId)
   RVec<int> ids;
   for(int i = 0; i<Jet_pt.size(); i++)
   {
-      if (Jet_pt[i]>25 && Jet_jetId[i]>0)
+      if (Jet_pt[i]>25 && Jet_jetId[i]>1)
       {
         ids.emplace_back(i);
       }
@@ -406,3 +417,4 @@ Float_t select_TopVar(Int_t EventTopCategory, Int_t Top_idx, rvec_f FatJet_pt, r
   else if (EventTopCategory==3) return TopLowPt_pt[Top_idx];
   else return -1000;
 }
+
