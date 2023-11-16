@@ -32,6 +32,12 @@ const float TopMer_trs=  0.99;
 const float dR=  0.8;
 const float btag_mediumWP = 0.2783;
 
+// ########################################################
+bool isMC(int SampleFlag){
+  if (SampleFlag == 0) return false;
+  else return true;
+}
+
 // ############### from skimtree_utils
 
 float deltaPhi (float phi1, float phi2){
@@ -87,8 +93,8 @@ bool hemveto(rvec_f Jet_eta, rvec_f Jet_phi, rvec_f Electron_eta, rvec_f Electro
 int w_nominalhemveto(float w_nominal, bool HEMVeto){
   int w_nominal_update = w_nominal;
   if (HEMVeto == false){
-    // w_nominal_update = w_nominal * 0.354;
-    w_nominal_update = w_nominal * 0.932;
+    w_nominal_update = w_nominal * 0.354;
+    // w_nominal_update = w_nominal * 0.932;
   }
   return w_nominal_update;
 }
@@ -123,15 +129,77 @@ bool tt_mtt_doublecounting(rvec_f GenPart_pdgId, rvec_f GenPart_pt, rvec_f GenPa
 
 bool MET_HLT_filter(bool HLT_PFMET120_PFMHT120_IDTight, bool HLT_PFMETNoMu120_PFMHTNoMu120_IDTight, bool flag_goodVertices, bool flag_globalSuperTightHalo2016Filter, bool flag_HBHENoiseFilter, bool flag_HBHENoiseIsoFilter, bool flag_EcalDeadCellTriggerPrimitiveFilter, bool flag_BadPFMuonFilter, bool flag_ecalBadCalibFilter, bool flag_eeBadScFilter){
   
-  bool good_HLT = HLT_PFMET120_PFMHT120_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight;
-  bool good_MET = flag_goodVertices && flag_globalSuperTightHalo2016Filter && flag_HBHENoiseFilter && flag_HBHENoiseIsoFilter && flag_EcalDeadCellTriggerPrimitiveFilter && flag_BadPFMuonFilter && flag_ecalBadCalibFilter && flag_eeBadScFilter;
-  return good_HLT && good_MET;
-  
+  // bool good_HLT = HLT_PFMET120_PFMHT120_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight;
+  bool good_MET = flag_goodVertices && flag_globalSuperTightHalo2016Filter && flag_HBHENoiseFilter && flag_HBHENoiseIsoFilter && flag_EcalDeadCellTriggerPrimitiveFilter && flag_BadPFMuonFilter && flag_ecalBadCalibFilter && flag_eeBadScFilter;// && flag_BadPFMuonDzFilter && flag_hfNoisyHitsFilter && flag_BadChargedCandidateFilter;
+  return good_MET; //good_HLT
+}
+bool MET_filter(bool flag_goodVertices, bool flag_globalSuperTightHalo2016Filter, bool flag_HBHENoiseFilter, bool flag_HBHENoiseIsoFilter, bool flag_EcalDeadCellTriggerPrimitiveFilter, bool flag_BadPFMuonFilter, bool flag_ecalBadCalibFilter, bool flag_eeBadScFilter){
+  bool good_MET = flag_goodVertices && flag_globalSuperTightHalo2016Filter && flag_HBHENoiseFilter && flag_HBHENoiseIsoFilter && flag_EcalDeadCellTriggerPrimitiveFilter && flag_BadPFMuonFilter && flag_ecalBadCalibFilter && flag_eeBadScFilter;// && flag_BadPFMuonDzFilter && flag_hfNoisyHitsFilter && flag_BadChargedCandidateFilter;
+  return good_MET;
 }
 
 // ########################################################
 // ########## PRESELECTION ################################
 // ########################################################
+int nTightElectron(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased)
+{
+  int n=0;
+  for(int i = 0; i<Electron_pt.size(); i++)
+  {
+    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 35 && abs(Electron_eta[i])<2.1) n+=1;
+  }
+  return n;
+}
+
+RVec<int> TightElectron_idx(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased)
+{
+  RVec<int> ids;
+  for(int i = 0; i<Electron_pt.size(); i++)
+  {
+    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 35 && abs(Electron_eta[i])<2.1) ids.emplace_back(i);
+  }
+  return ids;
+}
+
+int nTightMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_tightId)
+{
+  int n=0;
+  for(int i = 0; i<Muon_pt.size(); i++)
+  {
+    if(Muon_tightId[i]==1 && Muon_pt[i] > 30 && abs(Muon_eta[i])<2.4) n+=1;
+  }
+  return n;
+}
+
+RVec<int> TightMuon_idx(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_tightId)
+{
+  RVec<int> ids;
+  for(int i = 0; i<Muon_pt.size(); i++)
+  {
+    if(Muon_tightId[i]==1 && Muon_pt[i] > 30 && abs(Muon_eta[i])<2.4) ids.emplace_back(i);
+  }
+  return ids;
+}
+
+int nVetoElectron(rvec_f Electron_pt, rvec_f Electron_cutBased)
+{
+  int n=0;
+  for(int i = 0; i<Electron_pt.size(); i++)
+  {
+    if(Electron_cutBased[i]>=1 && Electron_pt[i] > 10) n+=1;
+  }
+  return n;
+}
+
+int nVetoMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_looseId)
+{
+  int n=0;
+  for(int i = 0; i<Muon_pt.size(); i++)
+  {
+    if(Muon_looseId[i]==1 && Muon_pt[i] > 10) n+=1;
+  }
+  return n;
+}
 
 bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased, rvec_f Muon_pt, rvec_f Muon_eta, rvec_b Muon_looseId )
 {
@@ -141,7 +209,7 @@ bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased, 
   
   for (size_t i = 0; i < Electron_pt.size(); i++) 
     {
-      if(Electron_cutBased[i]>=1 && Electron_pt[i] > 30. && abs(Electron_eta[i])<2.5) EleVetoPassed+=1;
+      if(Electron_cutBased[i]>=1 && Electron_pt[i] > 30. && abs(Electron_eta[i])<2.4) EleVetoPassed+=1;
     }
   for (size_t i = 0; i< Muon_pt.size(); i++)
     {
@@ -152,17 +220,22 @@ bool LepVeto(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutBased, 
   return IsLepVetoPassed;
 }
 
-RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_i Jet_jetId)
+RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_f Jet_eta, rvec_i Jet_jetId)
 {
   RVec<int> ids;
   for(int i = 0; i<Jet_pt.size(); i++)
   {
-      if (Jet_pt[i]>25 && Jet_jetId[i]>1)
+      if (Jet_pt[i]>30 && abs(Jet_eta[i])<2.4 && Jet_jetId[i]>1)
       {
         ids.emplace_back(i);
       }
   }
   return ids;
+}
+
+int nGoodJet(rvec_i GoodJet_idx)
+{
+  return GoodJet_idx.size();
 }
 
 bool atLeast1verygoodjet(rvec_i GoodJet_idx, rvec_f Jet_pt, rvec_f Jet_eta)
@@ -192,18 +265,108 @@ bool atLeast1verygoodfatjet(rvec_f FatJet_pt, rvec_f FatJet_msoftdrop)
 }
 
 // ########################################################
+// ########## New functions for deb #######################
+// ########################################################
+
+bool atLeast1jet_setparams(rvec_f Jet_pt, rvec_f Jet_eta, rvec_f Jet_mass, rvec_i Jet_jetId, float minpt, float maxeta, float minmass, int jetId)
+{
+  bool pass = false;
+  for(int i = 0; i < Jet_pt.size(); i++)
+  {
+    if (Jet_pt[i]>minpt && abs(Jet_eta[i])<maxeta && Jet_mass[i]>minmass && Jet_jetId[i]>=jetId) 
+    {
+      pass = true;
+    }
+  }
+  return pass;
+}
+
+bool atLeast1fatjet_setparams(rvec_f FatJet_pt, rvec_f FatJet_msoftdrop, rvec_f FatJet_eta, rvec_i FatJet_jetId, float minpt, float maxeta, float minmsoftdrop, int jetId)
+{
+  bool pass = false;
+  for(int i = 0; i < FatJet_pt.size(); i++)
+  {
+    if (FatJet_pt[i]>minpt && abs(FatJet_eta[i])<maxeta && FatJet_msoftdrop[i]>minmsoftdrop && FatJet_jetId[i]>=jetId) 
+    {
+      pass = true;
+    }
+  }
+  return pass;
+}
+
+Int_t GetLeadingPtJet(rvec_f Jet_pt)
+{
+  RVec<float> pt;
+  for(int i = 0; i < Jet_pt.size(); i++)
+  {
+    pt.emplace_back(Jet_pt[i]);
+  }
+  return ArgMax(pt);
+}
+
+Int_t GetLeadingPtLep(rvec_f Lep_pt, rvec_f Lep_eta, rvec_i Lep_looseId)
+{
+  RVec<float> pt;
+  for(int i = 0; i < Lep_pt.size(); i++)
+  {
+    if (Lep_looseId[i]>0 && Lep_pt[i]>30 && abs(Lep_eta[i])<2.4)
+    {
+      pt.emplace_back(Lep_pt[i]);
+    }
+  }
+  if (pt.size() == 0) return -1;
+  else return ArgMax(pt);
+}
+
+Float_t GetLeadingJetVar(int LeadingJet_idx, rvec_f Jet_var)
+{
+  if (LeadingJet_idx == -1) return 0;
+  else return Jet_var[LeadingJet_idx];
+}
+
+// ########################################################
+// ########## AH1lWR control region #######################
+// ########################################################
+int Lepton_flavour(int nTightElectron, int nTightMuon)
+{
+  int flav=0;
+  if (nTightElectron == 1) flav = 1;
+  else if (nTightMuon == 1) flav = 2;
+  return flav;
+}
+
+float Lepton_var(int Lepton_flavour, rvec_f Electron_var, rvec_i tightElectron_idx, rvec_f Muon_var, rvec_i tightMuon_idx)
+{
+  float var=0;
+  if (Lepton_flavour == 1) var = Electron_var[tightElectron_idx[0]];
+  else if (Lepton_flavour == 2) var = Muon_var[tightMuon_idx[0]];
+  else var = -1000;
+  return var;
+}
+
+// ########################################################
 // ############## MC/data comparison vars #################
 // ########################################################
 
 Float_t LeadingJetPt(rvec_i GoodJet_idx, rvec_f Jet_pt)
 {
-  int leadingjet_pt;
   RVec<float> GoodJet_pt;
   for(int i = 0; i < GoodJet_idx.size(); i++)
   {
     GoodJet_pt.emplace_back(Jet_pt[GoodJet_idx[i]]);
   }
   return Max(GoodJet_pt);
+}
+
+Float_t LeadingFatJetPt(rvec_f FatJet_pt)
+{
+  
+  RVec<float> fj_pt;
+  for(int i = 0; i < FatJet_pt.size(); i++)
+  {
+    fj_pt.emplace_back(FatJet_pt[i]);
+  }
+  return Max(fj_pt);
 }
 
 Int_t nForwardJet(rvec_i GoodJet_idx, rvec_f Jet_eta)

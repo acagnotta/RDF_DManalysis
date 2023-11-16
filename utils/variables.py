@@ -15,7 +15,7 @@ class variable(object):
 
 ### Definition of requeriments for plots (cut), variables and regions
 
-requirements = "leptonveto" #"leptonveto && MET_pt>150 && MinDelta_phi>0.6"
+requirements = ""#"leptonveto" #"leptonveto && MET_pt>150 && MinDelta_phi>0.6"
 
 vars = []
 
@@ -23,7 +23,22 @@ vars.append(variable(name = "MET_pt", title= "MET p_{T} [GeV]", nbins = 6, xmin 
 #vars.append(variable(name = "PuppiMET_pt", title= "Puppi MET p_{T} [GeV]", nbins = 20, xmin = 25, xmax=1025))
 vars.append(variable(name = "PuppiMET_pt", title= "p_{T}^{miss} [GeV]", nbins = 6, xmin = 200, xmax=800))
 vars.append(variable(name = "MET_phi", title= "MET #phi", nbins = 6, xmin = -math.pi, xmax=math.pi))
-vars.append(variable(name = "LeadingJet_pt", title= "Leading Jet p_{T} [GeV]", nbins = 8, xmin = 50, xmax=850))
+vars.append(variable(name = "LeadingJetPt_pt", title= "Leading Jet p_{T} [GeV]", nbins = 8, xmin = 50, xmax=850))
+vars.append(variable(name = "LeadingJetPt_eta", title= "Leading Jet #eta", nbins = 8, xmin = -4, xmax=4))
+vars.append(variable(name = "LeadingJetPt_phi", title= "Leading Jet #phi", nbins = 6, xmin = -math.pi, xmax=math.pi))
+vars.append(variable(name = "LeadingJetPt_mass", title= "Leading Jet mass [GeV]", nbins = 10, xmin = 50, xmax=550))
+vars.append(variable(name = "LeadingFatJetPt_pt", title= "Leading FatJet p_{T} [GeV]", nbins = 8, xmin = 50, xmax=850))
+vars.append(variable(name = "LeadingFatJetPt_eta", title= "Leading FatJet #eta", nbins = 8, xmin = -4, xmax=4))
+vars.append(variable(name = "LeadingFatJetPt_phi", title= "Leading FatJet #phi", nbins = 6, xmin = -math.pi, xmax=math.pi))
+vars.append(variable(name = "LeadingFatJetPt_mass", title= "Leading FatJet mass [GeV]", nbins = 10, xmin = 50, xmax=550))
+vars.append(variable(name = "LeadingMuonPt_pt", title= "Leading Muon p_{T} [GeV]", nbins = 30, xmin = 0, xmax=300))
+vars.append(variable(name = "LeadingMuonPt_eta", title= "Leading Muon #eta", nbins = 8, xmin = -4, xmax=4))
+vars.append(variable(name = "LeadingMuonPt_phi", title= "Leading Muon #phi", nbins = 6, xmin = -math.pi, xmax=math.pi))
+# vars.append(variable(name = "LeadingMuonPt_mass", title= "Leading Muon mass [GeV]", nbins = 10, xmin = 50, xmax=550))
+vars.append(variable(name = "LeadingElectronPt_pt", title= "Leading Electron p_{T} [GeV]", nbins = 30, xmin = 0, xmax=300))
+vars.append(variable(name = "LeadingElectronPt_eta", title= "Leading Electron #eta", nbins = 8, xmin = -4, xmax=4))
+vars.append(variable(name = "LeadingElectronPt_phi", title= "Leading Electron #phi", nbins = 6, xmin = -math.pi, xmax=math.pi))
+# vars.append(variable(name = "LeadingElectronPt_mass", title= "Leading Electron mass [GeV]", nbins = 10, xmin = 50, xmax=550))
 vars.append(variable(name = "nTopHighPt", title= "# Top Candidate Mix", nbins = 80, xmin = -0.5, xmax=80.5))
 vars.append(variable(name = "nTopLowPt", title= "# Top Candidate Resolved", nbins = 50, xmin = -0.5, xmax=50.5))
 vars.append(variable(name = "nJet", title= "# Jet", nbins = 10, xmin = -0.5, xmax=9.5))
@@ -37,9 +52,28 @@ vars.append(variable(name = "PV_npvsGood", title= "Number of PV", nbins = 51, xm
 # vars.append(variable(name = "Top_mass", title= "Top mass [GeV]", nbins = 30, xmin = 100, xmax=250))
 # vars.append(variable(name = "Top_pt", title= "Top p_{T} [GeV]", nbins = 30, xmin = 100, xmax=1000))
 
+nocut = ""
+hemveto = "((!isMC && year == 2018) && (HEMVeto || run<319077.))"
+hlt_met_filters = "((HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60 || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_Ele32_WPTight_Gsf || HLT_Ele115_CaloIdVT_GsfTrkIdT || HLT_Photon200 || HLT_IsoMu24) && MET_filter(Flag_goodVertices, Flag_globalSuperTightHalo2016Filter, Flag_HBHENoiseFilter, Flag_HBHENoiseIsoFilter, Flag_EcalDeadCellTriggerPrimitiveFilter, Flag_BadPFMuonFilter, Flag_ecalBadCalibFilter, Flag_eeBadScFilter)) "
+metcut = "(MET_pt>250)"
+
+
 regions = {
-    "all_regions" : "",  #### EventTopCategory!=0 fatto per fare selezione sui dati e comparare con MC18, da rimuovere il taglio qui",
-    "compared_regions" : "MET_pt>200",
+    "NoCut"                          : nocut,
+    "HEMVeto"                        : hemveto,
+    "HEMVeto_HLT_MET_filters"        : hemveto +" && "+ hlt_met_filters,
+    "HEMVeto_HLT_MET_filters_METcut" : hemveto +" && "+ hlt_met_filters +" && "+ metcut,
+    "AH"                             : hemveto +" && "+ hlt_met_filters +" && "+ metcut+" && "+"(nVetoMuon+nVetoElectron) == 0 && nJetBtag > 0 && nGoodJet>3",
+    "SL"                             : hemveto +" && "+ hlt_met_filters +" && "+ metcut+" && "+"((nTightElectron == 1 && nVetoElectron == 1 && nTightMuon == 0 && nVetoMuon == 0)||(nTightElectron == 0 && nVetoElectron == 0 && nTightMuon == 1 && nVetoMuon == 1)) && nJetBtag > 0",
+    "SMu"                            : hemveto +" && "+ hlt_met_filters +" && "+ metcut+" && "+"(nTightElectron == 0 && nVetoElectron == 0 && nTightMuon == 1 && nVetoMuon == 1) && nJetBtag > 0",
+    "SEl"                            : hemveto +" && "+ hlt_met_filters +" && "+ metcut+" && "+"(nTightElectron == 1 && nVetoElectron == 1 && nTightMuon == 0 && nVetoMuon == 0) && nJetBtag > 0",
+    "AH1lWR"                         : hemveto +" && "+ hlt_met_filters +" && "+ metcut+" && "+"((nTightElectron == 1 && nVetoElectron == 1 && nTightMuon == 0 && nVetoMuon == 0)||(nTightElectron == 0 && nVetoElectron == 0 && nTightMuon == 1 && nVetoMuon == 1)) && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
+
+
+    
+    
+    # "all_regions" : "",  #### EventTopCategory!=0 fatto per fare selezione sui dati e comparare con MC18, da rimuovere il taglio qui",
+
     # "rA": "MET_pt>200 && MinDelta_phi>0.6 && MinDelta_phi<2.5",
     # "rB": "MET_pt>200 && MinDelta_phi>2.5",
     # "rC": "MET_pt>200 && MinDelta_phi>0.6 && MinDelta_phi<2.5 && nJetBtag > 0 ",
