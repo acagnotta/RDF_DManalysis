@@ -106,6 +106,7 @@ QCD_2018.components = [QCDHT_100to200_2018, QCDHT_200to300_2018,
                        QCDHT_300to500_2018, QCDHT_500to700_2018, 
                        QCDHT_700to1000_2018, QCDHT_1000to1500_2018, 
                        QCDHT_1500to2000_2018, QCDHT_2000toInf_2018]
+
 #QCD_2018.components = [QCDHT_300to500_2018, QCDHT_500to700_2018, QCDHT_1000to1500_2018, QCDHT_1500to2000_2018, QCDHT_2000toInf_2018]
 
 ################################ TTbar ################################
@@ -209,6 +210,7 @@ ZJetsToNuNu_2018.components = [ZJetsToNuNu_HT100to200_2018, ZJetsToNuNu_HT200to4
                                ZJetsToNuNu_HT400to600_2018, ZJetsToNuNu_HT600to800_2018, 
                                ZJetsToNuNu_HT800to1200_2018, ZJetsToNuNu_HT1200to2500_2018, 
                                ZJetsToNuNu_HT2500toInf_2018]
+
 #ZJetsToNuNu_2018.components = [ZJetsToNuNu_HT100to200_2018, ZJetsToNuNu_HT200to400_2018, ZJetsToNuNu_HT400to600_2018, ZJetsToNuNu_HT600to800_2018, ZJetsToNuNu_HT1200to2500_2018, ZJetsToNuNu_HT2500toInf_2018]
 
 ################################ WJets ################################
@@ -387,7 +389,7 @@ TT_2022.components = [TT_semilep_2022, TT_hadr_2022]
 
 # ROOT.kSpring+3 per ZJetsToNuNu
 
-########################### DATA 2018 ############################################
+########################### DATA 2016 ############################################
 DataHTH_2016           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTH_2016")  #8.6fb
 DataHTH_2016.runP      = 'H'
 DataHTH_2016.year      = 2016
@@ -398,23 +400,54 @@ DataHTA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTA_2018")
 DataHTA_2018.runP      = 'A'
 DataHTA_2018.year      = 2018
 DataHTA_2018.dataset   = '/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataHTA_2018.process   = "DataHT_2018"
 DataHTB_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTB_2018")
 DataHTB_2018.runP      = 'B'
 DataHTB_2018.year      = 2018
 DataHTB_2018.dataset   = '/MET/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataHTB_2018.process   = "DataHT_2018"
 DataHTC_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTC_2018")
 DataHTC_2018.runP      = 'C'
 DataHTC_2018.year      = 2018
 DataHTC_2018.dataset   = '/MET/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
+DataHTC_2018.process   = "DataHT_2018"
 DataHTD_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTD_2018")
 DataHTD_2018.runP      = 'D'
 DataHTD_2018.year      = 2018
 DataHTD_2018.dataset   = '/MET/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
+DataHTD_2018.process   = "DataHT_2018"
 DataHT_2018            = sample(ROOT.kBlack, 1, 1001, "Data", "DataHT_2018")
 DataHT_2018.year       = 2018
 DataHT_2018.components = [DataHTA_2018, DataHTB_2018, 
                           DataHTC_2018, DataHTD_2018
                           ]
+
+DataSingleMuA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuA_2018")
+DataSingleMuA_2018.runP      = 'A'
+DataSingleMuA_2018.year      = 2018
+DataSingleMuA_2018.dataset   = '/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataSingleMuA_2018.process   = "DataSingleMu_2018"
+DataSingleMuB_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuB_2018")
+DataSingleMuB_2018.runP      = 'B'
+DataSingleMuB_2018.year      = 2018
+DataSingleMuB_2018.dataset   = '/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataSingleMuB_2018.process   = "DataSingleMu_2018"
+DataSingleMuC_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuC_2018")
+DataSingleMuC_2018.runP      = 'C'
+DataSingleMuC_2018.year      = 2018
+DataSingleMuC_2018.dataset   = '/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataSingleMuC_2018.process   = "DataSingleMu_2018"
+DataSingleMuD_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuD_2018")
+DataSingleMuD_2018.runP      = 'D'
+DataSingleMuD_2018.year      = 2018
+DataSingleMuD_2018.dataset   = '/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
+DataSingleMuD_2018.process   = "DataSingleMu_2018"
+DataSingleMu_2018            = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMu_2018")
+DataSingleMu_2018.year       = 2018
+DataSingleMu_2018.components = [DataSingleMuA_2018, DataSingleMuB_2018, 
+                                DataSingleMuC_2018, DataSingleMuD_2018
+                               ]
+
 
 DataMETA_2018          = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETA_2018")
 DataMETA_2018.runP     = 'A'
@@ -472,6 +505,9 @@ sample_dict = {
     # Data MET 2018   
     'DataHT_2018': DataHT_2018, 'DataHTA_2018': DataHTA_2018, 'DataHTB_2018': DataHTB_2018,
     'DataHTC_2018': DataHTC_2018, 'DataHTD_2018': DataHTD_2018, 'DataMETA_2018': DataMETA_2018,
+    # Data Single Muon 2018
+    'DataSingleMu_2018':DataSingleMu_2018, 'DataSingleMuA_2018':DataSingleMuA_2018, 'DataSingleMuB_2018':DataSingleMuB_2018, 
+    'DataSingleMuC_2018':DataSingleMuC_2018, 'DataSingleMuD_2018':DataSingleMuD_2018,
     # BKGs 2018
     'QCDHT_100to200_2018':QCDHT_100to200_2018, 'QCDHT_200to300_2018':QCDHT_200to300_2018, 
     'QCDHT_300to500_2018':QCDHT_300to500_2018, 'QCDHT_500to700_2018':QCDHT_500to700_2018, 
