@@ -106,6 +106,7 @@ QCD_2018.components = [QCDHT_100to200_2018, QCDHT_200to300_2018,
                        QCDHT_300to500_2018, QCDHT_500to700_2018, 
                        QCDHT_700to1000_2018, QCDHT_1000to1500_2018, 
                        QCDHT_1500to2000_2018, QCDHT_2000toInf_2018]
+
 #QCD_2018.components = [QCDHT_300to500_2018, QCDHT_500to700_2018, QCDHT_1000to1500_2018, QCDHT_1500to2000_2018, QCDHT_2000toInf_2018]
 
 ################################ TTbar ################################
@@ -209,6 +210,7 @@ ZJetsToNuNu_2018.components = [ZJetsToNuNu_HT100to200_2018, ZJetsToNuNu_HT200to4
                                ZJetsToNuNu_HT400to600_2018, ZJetsToNuNu_HT600to800_2018, 
                                ZJetsToNuNu_HT800to1200_2018, ZJetsToNuNu_HT1200to2500_2018, 
                                ZJetsToNuNu_HT2500toInf_2018]
+
 #ZJetsToNuNu_2018.components = [ZJetsToNuNu_HT100to200_2018, ZJetsToNuNu_HT200to400_2018, ZJetsToNuNu_HT400to600_2018, ZJetsToNuNu_HT600to800_2018, ZJetsToNuNu_HT1200to2500_2018, ZJetsToNuNu_HT2500toInf_2018]
 
 ################################ WJets ################################
@@ -271,7 +273,7 @@ WJetsHT2500toInf_2018.unix_code = 21207
 
 WJets_2018 = sample(ROOT.kGreen-3, 1, 1001, "W + Jets", "WJets_2018")
 WJets_2018.year = 2018
-WJets_2018.components = [#WJetsHT70to100_2018, 
+WJets_2018.components = [WJetsHT70to100_2018, 
                          WJetsHT100to200_2018, WJetsHT200to400_2018, 
                          WJetsHT400to600_2018, WJetsHT600to800_2018, 
                          WJetsHT800to1200_2018, WJetsHT1200to2500_2018, 
@@ -333,36 +335,42 @@ QCD_Pt_300to470_2022.sigma = 7589.0#pb
 QCD_Pt_300to470_2022.year = 2022
 QCD_Pt_300to470_2022.dataset ="/QCD_PT-300to470_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_300to470_2022.process = 'QCD_2022'
+QCD_Pt_300to470_2022.unix_code = 31000
 
 QCD_Pt_470to600_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_Pt_470to600_2022")
 QCD_Pt_470to600_2022.sigma = 626.4#pb
 QCD_Pt_470to600_2022.year = 2022
 QCD_Pt_470to600_2022.dataset = "/QCD_PT-470to600_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_470to600_2022.process = 'QCD_2022'
+QCD_Pt_470to600_2022.unix_code = 31001
 
 QCD_Pt_1000to1400_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_Pt_1000to1400_2022")
 QCD_Pt_1000to1400_2022.sigma = 8.92	 #pb
 QCD_Pt_1000to1400_2022.year = 2022
 QCD_Pt_1000to1400_2022.dataset = "/QCD_PT-1000to1400_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_1000to1400_2022.process = 'QCD_2022'
+QCD_Pt_1000to1400_2022.unix_code = 31002
 
 QCD_Pt_1800to2400_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_Pt_1800to2400_2022")
 QCD_Pt_1800to2400_2022.sigma = 0.1148 #pb
 QCD_Pt_1800to2400_2022.year = 2022
 QCD_Pt_1800to2400_2022.dataset = "/QCD_PT-1800to2400_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_1800to2400_2022.process = "QCD_2022"
+QCD_Pt_1800to2400_2022.unix_code = 31003
 
 QCD_Pt_2400to3200_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_Pt_2400to3200_2022")
 QCD_Pt_2400to3200_2022.sigma = 0.007542	 #pb
 QCD_Pt_2400to3200_2022.year = 2022
 QCD_Pt_2400to3200_2022.dataset = "/QCD_PT-2400to3200_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_2400to3200_2022.process = "QCD_2022"
+QCD_Pt_2400to3200_2022.unix_code = 31004
 
 QCD_Pt_3200_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_Pt_3200_2022")
 QCD_Pt_3200_2022.sigma = 0.0002331 #pb
 QCD_Pt_3200_2022.year = 2022
 QCD_Pt_3200_2022.dataset = "/QCD_PT-3200_TuneCP5_13p6TeV_pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1_ext1-v1/NANOAODSIM"
 QCD_Pt_3200_2022.process = "QCD_2022"
+QCD_Pt_3200_2022.unix_code = 31005
 
 QCD_2022 = sample(ROOT.kAzure-5, 1, 1001, "QCD", "QCD_2022")
 QCD_2022.year = 2018
@@ -374,12 +382,14 @@ TT_semilep_2022.sigma = 762.1 #pb
 TT_semilep_2022.year = 2022
 TT_semilep_2022.dataset = "/TTtoLNu2Q_TuneCP5CR1_13p6TeV_powheg-pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1-v1/NANOAODSIM"
 TT_semilep_2022.process = 'TT_2022'
+TT_semilep_2022.unix_code = 31100
 
 TT_hadr_2022 = sample(ROOT.kViolet-4, 1, 1001, "t#bar{t}", "TT_hadr_2022")
 TT_hadr_2022.sigma = 762.1
 TT_hadr_2022.year = 2022
 TT_hadr_2022.dataset = "/TTto4Q_TuneCP5CR2_13p6TeV_powheg-pythia8/Run3Summer22EENanoAODv11-126X_mcRun3_2022_realistic_postEE_v1-v1/NANOAODSIM"
 TT_hadr_2022.precess = 'TT_2022'
+TT_hadr_2022.unix_code = 31101
 
 TT_2022 = sample(ROOT.kViolet-4, 1, 1001, "t#bar{t}", "TT_2022")
 TT_2022.year = 2022
@@ -387,69 +397,111 @@ TT_2022.components = [TT_semilep_2022, TT_hadr_2022]
 
 # ROOT.kSpring+3 per ZJetsToNuNu
 
-########################### DATA 2018 ############################################
+########################### DATA 2016 ############################################
 DataHTH_2016           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTH_2016")  #8.6fb
 DataHTH_2016.runP      = 'H'
 DataHTH_2016.year      = 2016
 DataHTH_2016.dataset   = '/MET/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'
+# DataHTH_2016.unix_code = 
 
 ########################### DATA 2018 ############################################
-DataHTA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTA_2018")
-DataHTA_2018.runP      = 'A'
-DataHTA_2018.year      = 2018
-DataHTA_2018.dataset   = '/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
-DataHTB_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTB_2018")
-DataHTB_2018.runP      = 'B'
-DataHTB_2018.year      = 2018
-DataHTB_2018.dataset   = '/MET/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
-DataHTC_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTC_2018")
-DataHTC_2018.runP      = 'C'
-DataHTC_2018.year      = 2018
-DataHTC_2018.dataset   = '/MET/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
-DataHTD_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTD_2018")
-DataHTD_2018.runP      = 'D'
-DataHTD_2018.year      = 2018
-DataHTD_2018.dataset   = '/MET/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
-DataHT_2018            = sample(ROOT.kBlack, 1, 1001, "Data", "DataHT_2018")
-DataHT_2018.year       = 2018
-DataHT_2018.components = [DataHTA_2018, DataHTB_2018, 
-                          DataHTC_2018, DataHTD_2018
+DataMETA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETA_2018")
+DataMETA_2018.runP      = 'A'
+DataMETA_2018.year      = 2018
+DataMETA_2018.dataset   = '/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD' #'/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataMETA_2018.process   = "DataMET_2018"
+DataMETA_2018.unix_code = 20000
+DataMETB_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETB_2018")
+DataMETB_2018.runP      = 'B'
+DataMETB_2018.year      = 2018
+DataMETB_2018.dataset   = '/MET/Run2018B-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD' #'/MET/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
+DataMETB_2018.process   = "DataMET_2018"
+DataMETB_2018.unix_code = 20001
+DataMETC_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETC_2018")
+DataMETC_2018.runP      = 'C'
+DataMETC_2018.year      = 2018
+DataMETC_2018.dataset   = '/MET/Run2018C-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'#'/MET/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
+DataMETC_2018.process   = "DataMET_2018"
+DataMETC_2018.unix_code = 20002
+DataMETD_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETD_2018")
+DataMETD_2018.runP      = 'D'
+DataMETD_2018.year      = 2018
+DataMETD_2018.dataset   = '/MET/Run2018D-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'#'/MET/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD'
+DataMETD_2018.process   = "DataMET_2018"
+DataMETD_2018.unix_code = 20003
+
+DataMET_2018            = sample(ROOT.kBlack, 1, 1001, "Data", "DataMET_2018")
+DataMET_2018.year       = 2018
+DataMET_2018.components = [DataMETA_2018, DataMETB_2018, 
+                          DataMETC_2018, DataMETD_2018
                           ]
 
-DataMETA_2018          = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETA_2018")
-DataMETA_2018.runP     = 'A'
-DataMETA_2018.year     = 2018
-DataMETA_2018.dataset  = '/MET/Run2018A-02Apr2020-v1/NANOAOD' #ReRECO 2018 A
+DataSingleMuA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuA_2018")
+DataSingleMuA_2018.runP      = 'A'
+DataSingleMuA_2018.year      = 2018
+DataSingleMuA_2018.dataset   = '/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'
+DataSingleMuA_2018.process   = "DataSingleMu_2018"
+DataSingleMuA_2018.unix_code = 20100
+DataSingleMuB_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuB_2018")
+DataSingleMuB_2018.runP      = 'B'
+DataSingleMuB_2018.year      = 2018
+DataSingleMuB_2018.dataset   = '/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'
+DataSingleMuB_2018.process   = "DataSingleMu_2018"
+DataSingleMuB_2018.unix_code = 20101
+DataSingleMuC_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuC_2018")
+DataSingleMuC_2018.runP      = 'C'
+DataSingleMuC_2018.year      = 2018
+DataSingleMuC_2018.dataset   = '/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'
+DataSingleMuC_2018.process   = "DataSingleMu_2018"
+DataSingleMuC_2018.unix_code = 20102
+DataSingleMuD_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMuD_2018")
+DataSingleMuD_2018.runP      = 'D'
+DataSingleMuD_2018.year      = 2018
+DataSingleMuD_2018.dataset   = '/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD'
+DataSingleMuD_2018.process   = "DataSingleMu_2018"
+DataSingleMuD_2018.unix_code = 20103
+
+DataSingleMu_2018            = sample(ROOT.kBlack, 1, 1001, "Data", "DataSingleMu_2018")
+DataSingleMu_2018.year       = 2018
+DataSingleMu_2018.components = [DataSingleMuA_2018, DataSingleMuB_2018, 
+                                DataSingleMuC_2018, DataSingleMuD_2018
+                               ]
+
+
+# DataMETA_2018          = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETA_2018")
+# DataMETA_2018.runP     = 'A'
+# DataMETA_2018.year     = 2018
+# DataMETA_2018.dataset  = '/MET/Run2018A-02Apr2020-v1/NANOAOD' #ReRECO 2018 A
 
 ########################### DATA 2022 ############################################
-DataHTC_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTC_2022")
-DataHTC_2022.runP = 'C'
-DataHTC_2022.year = 2022
-DataHTC_2022.dataset = '/JetMET/Run2022C-ReRecoNanoAODv11-v1/NANOAOD'
-
-DataHTD_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTD_2022")
-DataHTD_2022.runP = 'D'
-DataHTD_2022.year = 2022
-DataHTD_2022.dataset = '/JetMET/Run2022D-ReRecoNanoAODv11-v1/NANOAOD'
-
-DataHTE_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTE_2022")
-DataHTE_2022.runP = 'E'
-DataHTE_2022.year = 2022
-DataHTE_2022.dataset = '/JetMET/Run2022E-ReRecoNanoAODv11-v1/NANOAOD'
-
-DataHTF_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTF_2022")
-DataHTF_2022.runP = 'F'
-DataHTF_2022.year = 2022
-DataHTF_2022.dataset = '/JetMET/Run2022F-PromptNanoAODv11_v1-v2/NANOAOD'
-  
-DataHTG_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTG_2022")
-DataHTG_2022.runP = 'G'
-DataHTG_2022.year = 2022
-DataHTG_2022.dataset = '/JetMET/Run2022G-PromptNanoAODv11_v1-v2/NANOAOD'
-
-DataHT_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataHT_2022")
-DataHT_2022.year = 2022
-DataHT_2022.components = [DataHTC_2022, DataHTD_2022, DataHTE_2022, DataHTF_2022, DataHTG_2022]
+DataJetMETC_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMETC_2022")
+DataJetMETC_2022.runP = 'C'
+DataJetMETC_2022.year = 2022
+DataJetMETC_2022.dataset = '/JetMET/Run2022C-ReRecoNanoAODv11-v1/NANOAOD'
+DataJetMETC_2022.unix_code = 30000
+DataJetMETD_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMETD_2022")
+DataJetMETD_2022.runP = 'D'
+DataJetMETD_2022.year = 2022
+DataJetMETD_2022.dataset = '/JetMET/Run2022D-ReRecoNanoAODv11-v1/NANOAOD'
+DataJetMETD_2022.unix_code = 30001
+DataJetMETE_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMETE_2022")
+DataJetMETE_2022.runP = 'E'
+DataJetMETE_2022.year = 2022
+DataJetMETE_2022.dataset = '/JetMET/Run2022E-ReRecoNanoAODv11-v1/NANOAOD'
+DataJetMETE_2022.unix_code = 30002
+DataJetMETF_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMETF_2022")
+DataJetMETF_2022.runP = 'F'
+DataJetMETF_2022.year = 2022
+DataJetMETF_2022.dataset = '/JetMET/Run2022F-PromptNanoAODv11_v1-v2/NANOAOD'
+DataJetMETF_2022.unix_code = 30003
+DataJetMETG_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMETG_2022")
+DataJetMETG_2022.runP = 'G'
+DataJetMETG_2022.year = 2022
+DataJetMETG_2022.dataset = '/JetMET/Run2022G-PromptNanoAODv11_v1-v2/NANOAOD'
+DataJetMETG_2022.unix_code = 30004
+DataJetMET_2022 = sample(ROOT.kBlack, 1, 1001, "Data", "DataJetMET_2022")
+DataJetMET_2022.year = 2022
+DataJetMET_2022.components = [DataJetMETC_2022, DataJetMETD_2022, DataJetMETE_2022, DataJetMETF_2022, DataJetMETG_2022]
 
 ############### code meanings ################
 # XXXXX  5 digits for each sample
@@ -457,7 +509,7 @@ DataHT_2022.components = [DataHTC_2022, DataHTD_2022, DataHTE_2022, DataHTF_2022
 # 2nd digit: 0 for data, 1 for MC bkg, 2 for MC signal
 # 3rd digit: for the process (QCD = 0, TT = 1, ZJets = 2, WJets = 3, 
 #                             Tprime = 0, tDM = 1, 
-#                             Data_MET = 0, Data_XX = 1,...)
+#                             Data_MET = 0, Data_SingleMu = 1,...)
 # 3rd digit and 4th digit: 2 digits identifies the sample 
 
 # example: QCDHT_100to200_2018 == 21000, QCDHT_200to300_2018 == 21001
@@ -470,8 +522,12 @@ sample_dict = {
     ################################## RUN II
     'DataHTH_2016': DataHTH_2016,
     # Data MET 2018   
-    'DataHT_2018': DataHT_2018, 'DataHTA_2018': DataHTA_2018, 'DataHTB_2018': DataHTB_2018,
-    'DataHTC_2018': DataHTC_2018, 'DataHTD_2018': DataHTD_2018, 'DataMETA_2018': DataMETA_2018,
+    'DataMET_2018': DataMET_2018, 'DataMETA_2018': DataMETA_2018, 'DataMETB_2018': DataMETB_2018,
+    'DataMETC_2018': DataMETC_2018, 'DataMETD_2018': DataMETD_2018, 
+    # 'DataMETA_2018': DataMETA_2018,
+    # Data Single Muon 2018
+    'DataSingleMu_2018':DataSingleMu_2018, 'DataSingleMuA_2018':DataSingleMuA_2018, 'DataSingleMuB_2018':DataSingleMuB_2018, 
+    'DataSingleMuC_2018':DataSingleMuC_2018, 'DataSingleMuD_2018':DataSingleMuD_2018,
     # BKGs 2018
     'QCDHT_100to200_2018':QCDHT_100to200_2018, 'QCDHT_200to300_2018':QCDHT_200to300_2018, 
     'QCDHT_300to500_2018':QCDHT_300to500_2018, 'QCDHT_500to700_2018':QCDHT_500to700_2018, 
@@ -505,5 +561,6 @@ sample_dict = {
     ########### TT
     'TT_2022': TT_2022, 'TT_semilep_2022' : TT_semilep_2022, 'TT_hadr_2022' : TT_hadr_2022,
     ############################################# DATA 
-    'DataHT_2022': DataHT_2022, 'DataHTC_2022':DataHTC_2022, 'DataHTD_2022':DataHTD_2022, 'DataHTE_2022':DataHTE_2022, 'DataHTF_2022':DataHTF_2022, 'DataHTG_2022':DataHTG_2022
+    'DataJetMET_2022': DataJetMET_2022, 'DataJetMETC_2022':DataJetMETC_2022, 'DataJetMETD_2022':DataJetMETD_2022, 
+    'DataJetMETE_2022':DataJetMETE_2022, 'DataJetMETF_2022':DataJetMETF_2022, 'DataJetMETG_2022':DataJetMETG_2022
     }
