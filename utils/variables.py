@@ -76,8 +76,8 @@ vars.append(variable(name = "PV_npvsGood", title= "Number of PV", nbins = 51, xm
 ######## 1D variables for histos
 vars2D = []
 
-vars2D.append(variable2D(name = "MinDelta_phiVsHT_eventHT", xname = "MinDelta_phi", yname = "HT_eventHT", xtitle = " min #Delta #phi", ytitle = "event HT", nxbins = 18, xmin = 0, xmax = math.pi,
-                            nybins = 20, ymin = 0, ymax = 2000))
+# vars2D.append(variable2D(name = "MinDelta_phiVsHT_eventHT", xname = "MinDelta_phi", yname = "HT_eventHT", xtitle = " min #Delta #phi", ytitle = "event HT", nxbins = 18, xmin = 0, xmax = math.pi,
+#                             nybins = 20, ymin = 0, ymax = 2000))
 
 
 singleLep   = "((nTightElectron == 1 && nVetoElectron == 1 && nTightMuon == 0 && nVetoMuon == 0)||(nTightElectron == 0 && nVetoElectron == 0 && nTightMuon == 1 && nVetoMuon == 1))"
