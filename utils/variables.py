@@ -1,6 +1,6 @@
 import math
 class variable(object):
-    def __init__(self, name, title, taglio=None, nbins=None, xmin=None, xmax=None, xarray=None):
+    def __init__(self, name, title, taglio=None, nbins=None, xmin=None, xmax=None, xarray=None, MConly = False, noUnOvFlowbin = False):
         self._name = name
         self._title = title
         self._taglio = taglio
@@ -8,6 +8,8 @@ class variable(object):
         self._xmin = xmin
         self._xmax = xmax
         self._xarray = xarray
+        self._MConly = MConly
+        self._noUnOvFlowbin = noUnOvFlowbin
     def __str__(self):
         return  '\"'+str(self._name)+'\",\"'+str(self._title)+'\",\"'+str(self._taglio)+'\",'+str(self._nbins)+','+str(self._xmin)+','+str(self._xmax)
 #variable("Top_pt", "Top p_T [GeV]", nbins = 50, xmin = 0 , xmax = 1000)
@@ -69,9 +71,22 @@ vars.append(variable(name = "MaxEta_jet", title= "max #eta jet", nbins = 5, xmin
 vars.append(variable(name = "HT_eventHT", title= "event HT", nbins = 20, xmin = 0, xmax = 2000))
 # vars.append(variable(name = "run", title= "Run Number", nbins = 5142, xmin = 315251.5, xmax = 320393.5))
 vars.append(variable(name = "PV_npvsGood", title= "Number of PV", nbins = 51, xmin = -0.5, xmax = 50.5))
+vars.append(variable(name = "EventTopCategory", title= "Top Category", nbins = 4, xmin = 0.5, xmax = 4.5))
+vars.append(variable(name = "Top_truth", title= "Top Truth", nbins = 4, xmin = -0.5, xmax = 3.5, MConly = True))
+vars.append(variable(name = "EventTopCategoryWithTruth", title= "Top Category (only true)", nbins = 4, xmin = 0.5, xmax = 4.5, MConly = True))
 
-# vars.append(variable(name = "Top_mass", title= "Top mass [GeV]", nbins = 30, xmin = 100, xmax=250))
-# vars.append(variable(name = "Top_pt", title= "Top p_{T} [GeV]", nbins = 30, xmin = 100, xmax=1000))
+vars.append(variable(name = "Top_mass", title= "Top mass [GeV]", nbins = 30, xmin = 100, xmax=250, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_pt", title= "Top p_{T} [GeV]", nbins = 30, xmin = 100, xmax=1000, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_score", title= "Top Score", nbins = 20, xmin = 0, xmax=1, noUnOvFlowbin = True))
+
+vars.append(variable(name = "Top_isolationPtJetsdR04", title= "Top Iso p_{T} (#Delta R=0.4)", nbins = 20, xmin = 0, xmax=2, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationPtJetsdR06", title= "Top Iso p_{T} (#Delta R=0.6)", nbins = 20, xmin = 0, xmax=2, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationPtJetsdR08", title= "Top Iso p_{T} (#Delta R=0.8)", nbins = 20, xmin = 0, xmax=2, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationPtJetsdR12", title= "Top Iso p_{T} (#Delta R=1.2)", nbins = 20, xmin = 0, xmax=2, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationNJetsdR04", title= "Top Iso n_{jet}  (#Delta R=0.4)", nbins = 11, xmin = -0.5, xmax=10.5, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationNJetsdR06", title= "Top Iso n_{jet}  (#Delta R=0.6)", nbins = 11, xmin = -0.5, xmax=10.5, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationNJetsdR08", title= "Top Iso n_{jet}  (#Delta R=0.8)", nbins = 11, xmin = -0.5, xmax=10.5, noUnOvFlowbin = True))
+vars.append(variable(name = "Top_isolationNJetsdR12", title= "Top Iso n_{jet}  (#Delta R=1.2)", nbins = 11, xmin = -0.5, xmax=10.5, noUnOvFlowbin = True))
 
 ######## 1D variables for histos
 vars2D = []
@@ -88,17 +103,28 @@ regions = {
     # "NoCut"                             : nocut,
     # "HEMVeto"                         : hemveto,
     # "HEMVeto_MET_filters"             : hemveto +" && " + met_filters,
+    "All"                            : "",   
     "Presel"                         : "MET_pt>250",
-    "AH"                             : "MET_pt>250  && (nVetoMuon+nVetoElectron) == 0 && nJetBtag > 0 && nGoodJet>3",
+    "AH"                             : "MET_pt>250 && (nVetoMuon+nVetoElectron) == 0 && nJetBtag > 0 && nGoodJet>3",
 
-    "SL"                             : "MET_pt>250  && " + singleLep + " && nJetBtag > 0",
-    "SEl"                            : "MET_pt>250  && " + singleE   + " && nJetBtag > 0",
-    "SMu"                            : "MET_pt>250  && " + singleMu  + " && nJetBtag > 0",
+    # "CompareToLeo"                   : "MET_pt>200 && MinDelta_phi>0.6 && (nVetoElectron==0 && nVetoMuon ==0)",
+    # "CompareToLeoRes"                : "MET_pt>200 && MinDelta_phi>0.6 && (nVetoElectron==0 && nVetoMuon ==0) && EventTopCategory==1",
+    # "CompareToLeoMix"                : "MET_pt>200 && MinDelta_phi>0.6 && (nVetoElectron==0 && nVetoMuon ==0) && EventTopCategory==2",
+    # "CompareToLeoMer"                : "MET_pt>200 && MinDelta_phi>0.6 && (nVetoElectron==0 && nVetoMuon ==0) && EventTopCategory==3",
+    # "CompareToLeoNoTop"              : "MET_pt>200 && MinDelta_phi>0.6 && (nVetoElectron==0 && nVetoMuon ==0) && EventTopCategory==4",
 
-    "AH1lWR"                         : "MET_pt>250  && " + singleLep + " && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
-    "AH1lWREl"                       : "MET_pt>250  && " + singleE   +" && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
-    "AH1lWRMu"                       : "MET_pt>250  && " + singleMu  +" && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
+    "SL"                             : singleLep + " && nJetBtag > 0",
+    "SEl"                            : singleE   + " && nJetBtag > 0",
+    "SMu"                            : singleMu  + " && nJetBtag > 0",
 
+    "AH1lWR"                         : singleLep + " && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
+    "AH1lWREl"                       : singleE   + " && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
+    "AH1lWRMu"                       : singleMu  + " && nGoodJet>=3 && MT<=140 && nJetBtag == 0",
+
+    "PreselResolved"                : "MET_pt>250 && EventTopCategory==1",
+    "PreselMixed"                   : "MET_pt>250 && EventTopCategory==2",
+    "PreselMerged"                  : "MET_pt>250 && EventTopCategory==3",
+    "PreselNoTop"                   : "MET_pt>250 && EventTopCategory==4",
     
     # "resolved_1fwjet": "EventTopCategory==3 && nForwardJet>0", 
     # "mixed_1fwjet": "EventTopCategory==2 && nForwardJet>0", 
