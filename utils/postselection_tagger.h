@@ -196,6 +196,27 @@ bool atLeast1GoodLep(rvec_i GoodMu_idx, rvec_i GoodEl_idx){
 }
 
 // ########################################################
+// ########### Top efficiency   ################
+// ########################################################
+
+float genpartTopPt(rvec_f GenPart_pt, rvec_i GenPart_pdgId, rvec_i GenPart_genPartIdxMother, rvec_i GenPart_genPartIdxMother_prompt)
+{
+  float top_pt = -100;
+  bool ptfilled = false;
+  for(int i = 0; i < GenPart_pt.size(); i++)
+  {
+    if(abs(GenPart_pdgId[i]) <= 5 && abs(GenPart_pdgId[GenPart_genPartIdxMother_prompt[i]])==24 && abs(GenPart_pdgId[GenPart_genPartIdxMother_prompt[GenPart_genPartIdxMother_prompt[i]]])==6)
+    {
+      top_pt = GenPart_pt[GenPart_genPartIdxMother_prompt[GenPart_genPartIdxMother_prompt[i]]];
+      ptfilled = true;
+    }
+    if(ptfilled) break;
+  }
+
+  return top_pt;
+}
+
+// ########################################################
 // ###########Alternative Truth definition ################
 // ########################################################
 
