@@ -30,6 +30,10 @@ const float btagDeepB_mediumWP_2018   = 0.2783;
 const float btagPNet_mediumWP_2022    = 0.245 ;
 const float btagPNet_mediumWP_2022EE  = 0.2605;
 
+const float btagDeepB_looseWP_2018   = 0.0490;
+const float btagPNet_looseWP_2022    = 0.047 ;
+const float btagPNet_looseWP_2022EE  = 0.0499;
+
 //  Top Resolved threshold {'fpr 10': 0.1334565, 'fpr 5': 0.24193972, 'fpr 1': 0.5411276, 'fpr 01': 0.77197933}
 //  Top Mixed threshold {'fpr 10': 0.13067308068275452, 'fpr 5': 0.2957885265350342, 'fpr 1': 0.7584613561630249, 'fpr 01': 0.9129540324211121}
 
@@ -356,8 +360,7 @@ int nTightElectron(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Electron_cutB
   int n=0;
   for(int i = 0; i<Electron_pt.size(); i++)
   {
-    // if(Electron_cutBased[i]>=4 && Electron_pt[i] > 35 && abs(Electron_eta[i])<2.1) n+=1;
-    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 50 && abs(Electron_eta[i])<2.1) n+=1;
+    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 50 && abs(Electron_eta[i])<2.5) n+=1;
   }
   return n;
 }
@@ -367,8 +370,7 @@ RVec<int> TightElectron_idx(rvec_f Electron_pt, rvec_f Electron_eta, rvec_f Elec
   RVec<int> ids;
   for(int i = 0; i<Electron_pt.size(); i++)
   {
-    // if(Electron_cutBased[i]>=4 && Electron_pt[i] > 35 && abs(Electron_eta[i])<2.1) ids.emplace_back(i);
-    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 50 && abs(Electron_eta[i])<2.1) ids.emplace_back(i);
+    if(Electron_cutBased[i]>=4 && Electron_pt[i] > 50 && abs(Electron_eta[i])<2.5) ids.emplace_back(i);
   }
   return ids;
 }
@@ -378,7 +380,7 @@ int nTightMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_tightId)
   int n=0;
   for(int i = 0; i<Muon_pt.size(); i++)
   {
-    if(Muon_tightId[i]==1 && Muon_pt[i] > 30 && abs(Muon_eta[i])<2.4) n+=1;
+    if(Muon_tightId[i]==1 && Muon_pt[i] > 50 && abs(Muon_eta[i])<2.4) n+=1;
   }
   return n;
 }
@@ -388,17 +390,17 @@ RVec<int> TightMuon_idx(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_tightId)
   RVec<int> ids;
   for(int i = 0; i<Muon_pt.size(); i++)
   {
-    if(Muon_tightId[i]==1 && Muon_pt[i] > 30 && abs(Muon_eta[i])<2.4) ids.emplace_back(i);
+    if(Muon_tightId[i]==1 && Muon_pt[i] > 50 && abs(Muon_eta[i])<2.4) ids.emplace_back(i);
   }
   return ids;
 }
 
-int nVetoElectron(rvec_f Electron_pt, rvec_f Electron_cutBased)
+int nVetoElectron(rvec_f Electron_pt, rvec_f Electron_cutBased, rvec_f Electron_eta)
 {
   int n=0;
   for(int i = 0; i<Electron_pt.size(); i++)
   {
-    if(Electron_cutBased[i]>=1 && Electron_pt[i] > 10) n+=1;
+    if(Electron_cutBased[i]>=1 && Electron_pt[i] > 30 && abs(Electron_eta[i])<2.5) n+=1;
   }
   return n;
 }
@@ -408,7 +410,7 @@ int nVetoMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_f Muon_looseId)
   int n=0;
   for(int i = 0; i<Muon_pt.size(); i++)
   {
-    if(Muon_looseId[i]==1 && Muon_pt[i] > 10) n+=1;
+    if(Muon_looseId[i]==1 && Muon_pt[i] > 30 && abs(Muon_eta[i])<2.4) n+=1;
   }
   return n;
 }
@@ -437,7 +439,8 @@ RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_f Jet_eta, rvec_i Jet_jetId)
   RVec<int> ids;
   for(int i = 0; i<Jet_pt.size(); i++)
   {
-      if (Jet_pt[i]>30 && abs(Jet_eta[i])<2.7 && Jet_jetId[i]>1)
+    // taglio in eta portato da 2.7 a 2.4 -> per definizione forward jets
+      if (Jet_pt[i]>30 && abs(Jet_eta[i])<2.4 && Jet_jetId[i]>1)
       {
         ids.emplace_back(i);
       }
@@ -450,7 +453,8 @@ RVec<int> GetGoodFatJet(rvec_f Jet_pt, rvec_f Jet_eta, rvec_i Jet_jetId)
   RVec<int> ids;
   for(int i = 0; i<Jet_pt.size(); i++)
   {
-      if (Jet_pt[i]>150 && abs(Jet_eta[i])<2.7 && Jet_jetId[i]>1)
+    // taglio in eta portato da 2.7 a 2.4 -> per definizione forward jets
+      if (Jet_pt[i]>150 && abs(Jet_eta[i])<2.4 && Jet_jetId[i]>1)
       {
         ids.emplace_back(i);
       }
@@ -504,15 +508,18 @@ float min_DeltaPhi(float MET_phi, rvec_f Jet_phi, rvec_i GoodJet_idx)
   return min_dphi;
 }
 
-float max_etajet(rvec_f Jet_eta, rvec_i GoodJet_idx)
+
+float MHT(rvec_f GoodJet_idx, rvec_f Jet_pt, rvec_f Jet_phi, rvec_f Jet_eta, rvec_f Jet_mass)
 {
-  float max_eta = -1000;
+  RVec<ROOT::Math::PtEtaPhiMVector> v;
+
   for(int i = 0; i < GoodJet_idx.size(); i++)
   {
-    if (abs(Jet_eta[GoodJet_idx[i]]) > max_eta) max_eta = abs(Jet_eta[GoodJet_idx[i]]);
+    const ROOT::Math::PtEtaPhiMVector tmp_ {Jet_pt[GoodJet_idx[i]], Jet_eta[GoodJet_idx[i]], Jet_phi[GoodJet_idx[i]], Jet_mass[GoodJet_idx[i]]};
+    v.emplace_back(tmp_);
   }
-  return max_eta;
-
+  auto v_sum_lv = Sum(v, ROOT::Math::PtEtaPhiMVector());
+  return v_sum_lv.M();
 }
 
 // ########################################################
@@ -629,7 +636,7 @@ Int_t nForwardJet(rvec_f Jet_pt, rvec_f Jet_jetId, rvec_f Jet_eta)
   int nfwdjet = 0;
   for(int i = 0; i < Jet_pt.size(); i++)
   {
-    if (Jet_pt[i]>30 && Jet_jetId[i] && Jet_eta[i]>2.5)
+    if (Jet_pt[i]>30 && Jet_jetId[i] && abs(Jet_eta[i])>2.4)
     {
       nfwdjet += 1;
     }
@@ -637,29 +644,34 @@ Int_t nForwardJet(rvec_f Jet_pt, rvec_f Jet_jetId, rvec_f Jet_eta)
   return nfwdjet;
 }
 
-// Int_t njetbtag(rvec_i GoodJet_idx, rvec_f Jet_btagDeepFlavB)
-// {
-//   int nbjet = 0;
-//   for(int i = 0; i < GoodJet_idx.size(); i++)
-//   {
-//     if (Jet_btagDeepFlavB[GoodJet_idx[i]] > btag_mediumWP)
-//     {
-//       nbjet += 1;
-//     }
-//   }
-//   return nbjet;
-// }
-RVec<int> GetJetBTag(rvec_i GoodJet, rvec_f Jet_btagDeepB, int year, bool EE){
+RVec<int> GetJetBTag(rvec_i GoodJet, rvec_f Jet_btagDeepB, int year, bool EE, bool wp){
+  // WP legend: 0->loose, 1->medium
     RVec<int> ids;
     float bthres;
     if(year == 2018){
+      if(wp == 1){
         bthres = btagDeepB_mediumWP_2018;
+      }
+      else if(wp==0){
+        bthres = btagDeepB_looseWP_2018;
+      }
     }else if(year == 2022){
         if(EE){
+          if(wp == 1){
             bthres = btagPNet_mediumWP_2022EE;
+          }
+          else if(wp==0){
+            bthres = btagPNet_looseWP_2022EE;
+          }
         }
         else{
+          if(wp == 1){
             bthres = btagPNet_mediumWP_2022;
+          }
+          else if(wp==0){
+            bthres = btagPNet_looseWP_2022;
+          }
+          
         }
     }
     

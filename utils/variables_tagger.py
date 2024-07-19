@@ -79,8 +79,9 @@ vars.append(variable(name = "nJetBtag", title= "# b-Jet ", nbins = 5, xmin = -0.
 # vars.append(variable(name = "EventTopCategory", title= "Top Category", nbins = 4, xmin = 0.5, xmax = 4.5))
 # vars.append(variable(name = "Top_truth", title= "Top Truth", nbins = 4, xmin = -0.5, xmax = 3.5, MConly = True))
 # vars.append(variable(name = "EventTopCategoryWithTruth", title= "Top Category (only true)", nbins = 4, xmin = 0.5, xmax = 4.5, MConly = True))
-
-
+for wp in ["WPloose","WPmedium","WPtight"]:
+    vars.append(variable(name = "Top_mass_"+wp, title= "Top mass [GeV]", nbins = 30, xmin = 100, xmax=250, noUnOvFlowbin = True))
+    vars.append(variable(name = "Top_pt_"+wp, title= "Top p_{T} [GeV]", nbins = 30, xmin = 100, xmax=1000, noUnOvFlowbin = True))
 
 vars.append(variable(name = "Top_mass_Resolved", title= "best Top Resolved mass [GeV]", nbins = 30, xmin = 100, xmax=250, noUnOvFlowbin = True))
 vars.append(variable(name = "Top_pt_Resolved", title= "best Top Resolved p_{T} [GeV]", nbins = 30, xmin = 100, xmax=1000, noUnOvFlowbin = True))
@@ -92,10 +93,12 @@ vars.append(variable(name = "nClusterT1TopMixed", title = "# Top Clusters T1 Mix
 vars.append(variable(name = "nClusterT2TopMixed", title = "# Top Clusters T2 Mixed", nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False))
 vars.append(variable(name = "nClusterT1TopResolved", title = "# Top Clusters T1 Resolved", nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False))
 vars.append(variable(name = "nClusterT2TopResolved", title = "# Top Clusters T2 Resolved", nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False))
-vars.append(variable(name = "nTopClusterT1MixedReco", title = "# Top Clusters T1 Reco Mixed" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
-vars.append(variable(name = "nTopClusterT2MixedReco", title = "# Top Clusters T2 Reco Mixed" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
-vars.append(variable(name = "nTopClusterT1ResolvedReco", title = "# Top Clusters T1 Reco Resolved" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
-vars.append(variable(name = "nTopClusterT2ResolvedReco", title = "# Top Clusters T2 Reco Resolved" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
+for wp in ["WPloose","WPmedium","WPtight"]:
+    vars.append(variable(name = "nTopClusterT1MixedReco_"+wp, title = "# Top Clusters T1 Reco Mixed" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
+    vars.append(variable(name = "nTopClusterT2MixedReco_"+wp, title = "# Top Clusters T2 Reco Mixed" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
+    vars.append(variable(name = "nTopClusterT1ResolvedReco_"+wp, title = "# Top Clusters T1 Reco Resolved" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
+    vars.append(variable(name = "nTopClusterT2ResolvedReco_"+wp, title = "# Top Clusters T2 Reco Resolved" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False)) 
+
 vars.append(variable(name = "TopMixed_TopScore", title = "Top Mixed Score", nbins = 20, xmin = 0, xmax = 1, noUnOvFlowbin = True, MConly = False))
 vars.append(variable(name = "TopMixed_Score_truthstandard", title = "Top Mixed Score (True Standard Top)", nbins = 20, xmin = 0, xmax = 1, noUnOvFlowbin = True, MConly = True))
 vars.append(variable(name = "TopMixed_Score_truth1_incl", title = "Top Mixed Score (True t1 Top)", nbins = 20, xmin = 0, xmax = 1, noUnOvFlowbin = True, MConly = True))
@@ -114,16 +117,17 @@ for top in TruthType.keys():
     for tr in TruthType[top].keys():
         vars.append(variable(name = "nTopClusterT1"+t+"MCTag"+tr, title = "# Top Clusters T1 MC tagged ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
         vars.append(variable(name = "nTopClusterT2"+t+"MCTag"+tr, title = "# Top Clusters T2 MC tagged ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
-        vars.append(variable(name = "nTopClusterT2"+t+"TrueReco"+tr, title = "# Top Clusters T2 true reco ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
-        vars.append(variable(name = "nTopClusterT1"+t+"TrueReco"+tr, title = "# Top Clusters T1 true reco ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
-        vars.append(variable(name = "TopClusterT1"+t+"TrueRecoFirstCluster"+tr, title = "Top "+t+" Cluster T1 True Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
-        vars.append(variable(name = "TopClusterT2"+t+"TrueRecoFirstCluster"+tr, title = "Top "+t+" Cluster T2 True Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
-        vars.append(variable(name = "TopClusterT1"+t+"FalseRecoFirstCluster"+tr, title = "Top "+t+" Cluster T1 False Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
-        vars.append(variable(name = "TopClusterT2"+t+"FalseRecoFirstCluster"+tr, title = "Top "+t+" Cluster T2 False Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
         vars.append(variable(name = "TopClusterT1"+t+"MCTagTrueFirstCluster"+tr, title = "Top "+t+" Cluster T1 True ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
         vars.append(variable(name = "TopClusterT2"+t+"MCTagTrueFirstCluster"+tr, title = "Top "+t+" Cluster T2 True ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
         vars.append(variable(name = "TopClusterT1"+t+"MCTagFalseFirstCluster"+tr, title = "Top "+t+" Cluster T1 False ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
         vars.append(variable(name = "TopClusterT2"+t+"MCTagFalseFirstCluster"+tr, title = "Top "+t+" Cluster T2 False ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True))
+        for wp in ["WPloose","WPmedium","WPtight"]:
+            vars.append(variable(name = "nTopClusterT2"+t+"TrueReco"+tr+"_"+wp, title = "# Top Clusters T2 true reco ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
+            vars.append(variable(name = "nTopClusterT1"+t+"TrueReco"+tr+"_"+wp, title = "# Top Clusters T1 true reco ("+tr+") "+t+"" , nbins = 16, xmin = -0.5, xmax = 15.5, noUnOvFlowbin = False, MConly = True)) 
+            vars.append(variable(name = "TopClusterT1"+t+"TrueRecoFirstCluster"+tr+"_"+wp, title = "Top "+t+" Cluster T1 True Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
+            vars.append(variable(name = "TopClusterT2"+t+"TrueRecoFirstCluster"+tr+"_"+wp, title = "Top "+t+" Cluster T2 True Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
+            vars.append(variable(name = "TopClusterT1"+t+"FalseRecoFirstCluster"+tr+"_"+wp, title = "Top "+t+" Cluster T1 False Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
+            vars.append(variable(name = "TopClusterT2"+t+"FalseRecoFirstCluster"+tr+"_"+wp, title = "Top "+t+" Cluster T2 False Reco ("+tr+")", nbins = 3, xmin = -0.5, xmax = 2.5, noUnOvFlowbin = True, MConly = True)) 
 
 
 
@@ -148,11 +152,24 @@ regions = {
     # "HEMVeto"                         : hemveto,
     # "HEMVeto_MET_filters"             : hemveto +" && " + met_filters,
     "All"                            : "",
-    "Presel"                         : "MET_pt>25",
-    "1TopLep"                        : "MET_pt>25 && NGoodTopLep==1",
-    "0TopLep"                        : "MET_pt>25 && NGoodTopLep==0",
-    "atLeast2TopLep"                 : "MET_pt>25 && NGoodTopLep>1",
-    "1TopLepMCtag"                   : "MET_pt>25 && NGoodTopLep==1 && BJetTopLep_MCtag",
+    "Presel"                         : "MET_pt>50",
+    "PreselWpt"                        : "MET_pt>50 && W_pt>250",
+    "1TopLep"                        : "MET_pt>50 && NGoodTopMu==1",
+    "1TopLepWpt"                        : "MET_pt>50 && NGoodTopMu==1 && W_pt>250"
+}
+for wp in ["WPloose","WPmedium","WPtight"]:
+    regions["1TopLep_1TopHadrRes_"+wp]    = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==1",    
+    regions["1TopLep_1TopHadrMix_"+wp]    = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==2",    
+    regions["1TopLep_1TopHadrMer_"+wp]    = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==3",
+    regions["1TopLep_1TopHadrAll_"+wp]    = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+">0 && EventTopCategory_"+wp+"<4",
+    regions["1TopLep_1TopHadrResWpt_"+wp] = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==1 && W_pt>250",    
+    regions["1TopLep_1TopHadrMixWpt_"+wp] = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==2 && W_pt>250",    
+    regions["1TopLep_1TopHadrMerWpt_"+wp] = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+"==3 && W_pt>250",
+    regions["1TopLep_1TopHadrAllWpt_"+wp] = "MET_pt>50 && NGoodTopMu==1 && EventTopCategory_"+wp+">0 && EventTopCategory_"+wp+"<4 && W_pt>250"
+
+    # "0TopLep"                        : "MET_pt>25 && NGoodTopLep==0",
+    # "atLeast2TopLep"                 : "MET_pt>50 && NGoodTopLep>1",
+    # "1TopLepMCtag"                   : "MET_pt>50 && NGoodTopLep==1 && BJetTopLep_MCtag",
     
 #     "PreselResolved"                 : "MET_pt>25 && EventTopCategory==1",
 #     "PreselMixed"                    : "MET_pt>25 && EventTopCategory==2",
@@ -166,4 +183,3 @@ regions = {
     # "AHMixed"                        : "MET_pt>25 && nJetBtag > 1 && nGoodJet>3 && EventTopCategory==2",
     # "AHMerged"                       : "MET_pt>25 && nJetBtag > 1 && nGoodJet>3 && EventTopCategory==3",
     # "AHNoTop"                        : "MET_pt>25 && nJetBtag > 1 && nGoodJet>3 && EventTopCategory==4",
-}

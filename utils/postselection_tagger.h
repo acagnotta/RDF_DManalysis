@@ -18,9 +18,16 @@ using rvec_i = const RVec<int> &;
 using rvec_b = const RVec<bool> &;
 using rvec_rvec_i = const RVec<RVec<int>> &;
 
-const float TopRes_trs=  0.5411276;
-const float TopMix_trs=  0.7584613561630249;
-const float TopMer_trs=  0.94;
+const float TopRes_trsTight =  0.77197933;
+const float TopRes_trsMed   =  0.5411276;
+const float TopRes_trsLoose =  0.24193972;
+
+
+const float TopMer_trsTight =  0.97;
+const float TopMer_trsMed =  0.94;
+const float TopMer_trsLoose =  0.85;
+
+
 const float dR=  0.8;
 
 const float btagDeepB_mediumWP_2018   = 0.2783;
@@ -127,6 +134,17 @@ int w_nominalhemveto(float w_nominal, bool HEMVeto, int year){
 // ############## Filter and Define #######################
 // ########################################################
 
+int nVetoElectron(rvec_f Electron_pt, rvec_f Electron_cutBased, rvec_f Electron_eta)
+{
+  int n=0;
+  for(int i = 0; i<Electron_pt.size(); i++)
+  {
+    if(Electron_cutBased[i]>=1 && Electron_pt[i] > 10 && abs(Electron_eta[i])<2.5) n+=1;
+  }
+  return n;
+}
+
+
 RVec<int> GetGoodElectron(rvec_f Electron_pt, rvec_f Electron_eta, rvec_i Electron_mvaFall17V2Iso_WPL, rvec_f Electron_miniPFRelIso_all)
 {
   RVec<int> ids;
@@ -140,12 +158,12 @@ RVec<int> GetGoodElectron(rvec_f Electron_pt, rvec_f Electron_eta, rvec_i Electr
   return ids;
 }
 
-RVec<int> GetGoodMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_i Muon_tightId, rvec_f Muon_miniPFRelIso_all)
+RVec<int> GetGoodMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_i Muon_tightId)
 {
   RVec<int> ids;
   for(int i = 0; i<Muon_pt.size(); i++)
   {
-      if (Muon_pt[i] > 30 && abs(Muon_eta[i]) < 2.4 && Muon_tightId[i] == 1 && abs(Muon_miniPFRelIso_all[i]) < 0.1)
+      if (Muon_pt[i] > 55 && abs(Muon_eta[i]) < 2.5 && Muon_tightId[i] == 1)
       {
         ids.emplace_back(i);
       }
@@ -153,18 +171,19 @@ RVec<int> GetGoodMuon(rvec_f Muon_pt, rvec_f Muon_eta, rvec_i Muon_tightId, rvec
   return ids;
 }
 
-RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_i Jet_jetId)
+RVec<int> GetGoodJet(rvec_f Jet_pt, rvec_i Jet_jetId, rvec_f Jet_eta)
 {
   RVec<int> ids;
   for(int i = 0; i<Jet_pt.size(); i++)
   {
-      if (Jet_pt[i]>25 && Jet_jetId[i]>0)
+      if (Jet_pt[i]>30 && Jet_jetId[i]>0 && abs(Jet_eta[i])<2.4)
       {
         ids.emplace_back(i);
       }
   }
   return ids;
 }
+
 
 RVec<int> GetJetBTag(rvec_i GoodJet, rvec_f Jet_btagDeepB, int year, bool EE){
     RVec<int> ids;
@@ -464,6 +483,31 @@ RVec<int> countTopLep(rvec_i GoodMu_idx, rvec_f Muon_eta, rvec_f Muon_phi, rvec_
   return b;
 }
 
+RVec<int> countTopMu(rvec_i GoodMu_idx, rvec_f Muon_eta, rvec_f Muon_phi, rvec_i JetBTag_idx, rvec_f Jet_eta, rvec_f Jet_phi)
+{
+  // return deltaR(Jet_eta[JetBTag_idx[0]], Jet_phi[JetBTag_idx[0]], Electron_eta[GoodEl_idx[0]], Electron_phi[GoodEl_idx[0]]);
+  RVec<int> b;
+  for(int i=0; i < JetBTag_idx.size(); i++)
+  {
+    bool alreadycounted = false;
+    
+    for(int m=0; m < GoodMu_idx.size(); m++)
+    {
+      if(deltaR(Jet_eta[JetBTag_idx[i]], Jet_phi[JetBTag_idx[i]], Muon_eta[GoodMu_idx[m]], Muon_phi[GoodMu_idx[m]]) < 2.) 
+      {
+        b.emplace_back(JetBTag_idx[i]);
+        alreadycounted = true;
+      }
+      if(alreadycounted) 
+      {
+          break;
+      }
+    }
+    
+  }
+  return b;
+}
+
 RVec<float> drBLep(rvec_i GoodMu_idx, rvec_f Muon_eta, rvec_f Muon_phi, rvec_i GoodEl_idx, rvec_f Electron_eta, rvec_f Electron_phi, rvec_i JetBTag_idx, rvec_f Jet_eta, rvec_f Jet_phi)
 {
   // return deltaR(Jet_eta[JetBTag_idx[0]], Jet_phi[JetBTag_idx[0]], Electron_eta[GoodEl_idx[0]], Electron_phi[GoodEl_idx[0]]);
@@ -502,6 +546,31 @@ RVec<float> drBLep(rvec_i GoodMu_idx, rvec_f Muon_eta, rvec_f Muon_phi, rvec_i G
   return b;
 }
 
+RVec<float> drBMu(rvec_i GoodMu_idx, rvec_f Muon_eta, rvec_f Muon_phi,  rvec_i JetBTag_idx, rvec_f Jet_eta, rvec_f Jet_phi)
+{
+  // return deltaR(Jet_eta[JetBTag_idx[0]], Jet_phi[JetBTag_idx[0]], Electron_eta[GoodEl_idx[0]], Electron_phi[GoodEl_idx[0]]);
+  RVec<float> b;
+  for(int i=0; i < JetBTag_idx.size(); i++)
+  {
+    bool alreadycounted = false;
+    
+    for(int m=0; m < GoodMu_idx.size(); m++)
+    {
+      if(deltaR(Jet_eta[JetBTag_idx[i]], Jet_phi[JetBTag_idx[i]], Muon_eta[GoodMu_idx[m]], Muon_phi[GoodMu_idx[m]]) < 2.) 
+      {
+        b.emplace_back(deltaR(Jet_eta[JetBTag_idx[i]], Jet_phi[JetBTag_idx[i]], Muon_eta[GoodMu_idx[m]], Muon_phi[GoodMu_idx[m]]));
+        alreadycounted = true;
+      }
+      if(alreadycounted) 
+      {
+          break;
+      }
+    }
+    
+  }
+  return b;
+}
+
 int nearest(rvec_i GoodTopLepBJet_idx, rvec_f GoodTopLepBJet_dr)
 {
     int idx = -1000;
@@ -532,12 +601,12 @@ int BJetTopLep_MCtag(rvec_i Jet_matched, rvec_i Jet_pdgId, rvec_i Jet_topMother,
 //Hadronic
 
 // Top Merged, FatJet over threshold of particleNet_TvsQCD
-RVec<int> select_TopMer(rvec_f FatJet_particleNet_TvsQCD)
+RVec<int> select_TopMer(rvec_f FatJet_particleNet_TvsQCD, rvec_i GoodFatJet_idx, float threshold)
 {
   RVec<int> ids;
-  for (int i = 0; i < FatJet_particleNet_TvsQCD.size(); i++)
+  for (int i = 0; i < GoodFatJet_idx.size(); i++)
   {
-  	if(FatJet_particleNet_TvsQCD[i]>TopMer_trs){
+  	if(FatJet_particleNet_TvsQCD[GoodFatJet_idx[i]]>threshold){
       ids.emplace_back(i);
 	  }
   }
@@ -591,7 +660,7 @@ bool check_same_top_type2(int idx_fj_1, int idx_j0_1, int idx_j1_1, int idx_j2_1
 }
 
 // Top Mixed, candidates over threshold of TopScore and candidates not overlapping (do not share any abject)
-RVec<int> select_TopMix(rvec_f TopMixed_TopScore, rvec_f TopMixed_idxFatJet, rvec_f TopMixed_idxJet0, rvec_f TopMixed_idxJet1, rvec_f TopMixed_idxJet2)
+RVec<int> select_TopMix(rvec_f TopMixed_TopScore, rvec_f TopMixed_idxFatJet, rvec_f TopMixed_idxJet0, rvec_f TopMixed_idxJet1, rvec_f TopMixed_idxJet2, rvec_i GoodJet_idx, rvec_i GoodFatJet_idx, int bjetTopLep, float threshold)
 {
   RVec<int> ids;
   RVec<float> scores;
@@ -599,11 +668,15 @@ RVec<int> select_TopMix(rvec_f TopMixed_TopScore, rvec_f TopMixed_idxFatJet, rve
 
   for (int i = 0; i < TopMixed_TopScore.size(); i++)
   {
-  	if(TopMixed_TopScore[i]>TopMix_trs)
+    if( std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopMixed_idxJet0[i]) != GoodJet_idx.end() &&
+        std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopMixed_idxJet1[i]) != GoodJet_idx.end() &&
+        (std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopMixed_idxJet2[i]) != GoodJet_idx.end() || TopMixed_idxJet2[i] == -1) &&
+        (std::find(GoodFatJet_idx.begin(), GoodFatJet_idx.end(), TopMixed_idxFatJet[i]) != GoodFatJet_idx.end() || TopMixed_idxFatJet[i] == -1)
+        && TopMixed_TopScore[i] > threshold && TopMixed_idxJet0[i] != bjetTopLep && TopMixed_idxJet1[i] != bjetTopLep && TopMixed_idxJet2[i] != bjetTopLep)
     {
       ids.emplace_back(i);
-	    scores.emplace_back(TopMixed_TopScore[i]);
-	  }
+      scores.emplace_back(TopMixed_TopScore[i]);
+    }
   }
   const RVec<int> scores_indices_ = Argsort(scores);
   RVec<int> scores_indices = Reverse(scores_indices_);
@@ -635,14 +708,17 @@ RVec<int> select_TopMix(rvec_f TopMixed_TopScore, rvec_f TopMixed_idxFatJet, rve
   return ids_selected;
 }
 
-RVec<int> select_TopRes(rvec_f TopResolved_TopScore, rvec_f TopResolved_idxJet0, rvec_f TopResolved_idxJet1, rvec_f TopResolved_idxJet2)
+RVec<int> select_TopRes(rvec_f TopResolved_TopScore, rvec_f TopResolved_idxJet0, rvec_f TopResolved_idxJet1, rvec_f TopResolved_idxJet2, rvec_i GoodJet_idx, int bjetTopLep, float threshold)
 {
   RVec<int> ids;
   RVec<float> scores;
   RVec<int> ids_selected;
   for (int i = 0; i < TopResolved_TopScore.size(); i++)
   {
-	  if(TopResolved_TopScore[i]>TopRes_trs)
+	  if(TopResolved_TopScore[i]>threshold && TopResolved_idxJet0[i] != bjetTopLep && TopResolved_idxJet1[i] != bjetTopLep && TopResolved_idxJet2[i] != bjetTopLep &&
+        std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopResolved_idxJet0[i]) != GoodJet_idx.end() &&
+        std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopResolved_idxJet1[i]) != GoodJet_idx.end() &&
+        std::find(GoodJet_idx.begin(), GoodJet_idx.end(), TopResolved_idxJet2[i]) != GoodJet_idx.end())
     {
 	    ids.emplace_back(i);
 	    scores.emplace_back(TopResolved_TopScore[i]);
@@ -677,6 +753,7 @@ RVec<int> select_TopRes(rvec_f TopResolved_TopScore, rvec_f TopResolved_idxJet0,
   }
   return ids_selected;
 }
+
 
 Int_t nTop(rvec_i ids)
 {
@@ -891,7 +968,7 @@ RVec<int> MCTaggedTopCluster(rvec_rvec_i topcluster, rvec_i TopMixed_truth)
 }
 
 // return a bool that is true if one of the tops in the cluster is selected as top
-RVec<int> RecoTaggedTopClusterMixed(rvec_rvec_i topcluster, rvec_f TopMixed_TopScore)
+RVec<int> RecoTaggedTopClusterMixed(rvec_rvec_i topcluster, rvec_f TopMixed_TopScore, float threshold)
 {
   RVec<int> tagged;
 
@@ -900,14 +977,14 @@ RVec<int> RecoTaggedTopClusterMixed(rvec_rvec_i topcluster, rvec_f TopMixed_TopS
     int flag = 0;
     for(int j = 0; j < topcluster[i].size(); j++)
     {
-      if (TopMixed_TopScore[topcluster[i][j]] >= TopMix_trs){flag +=1;}
+      if (TopMixed_TopScore[topcluster[i][j]] >= threshold){flag +=1;}
     }
     tagged.emplace_back(flag);
   }
   if(topcluster.size()==0){tagged.emplace_back(-1);}
   return tagged;
 }
-RVec<int> RecoTaggedTopClusterResolved(rvec_rvec_i topcluster, rvec_f TopResolved_TopScore)
+RVec<int> RecoTaggedTopClusterResolved(rvec_rvec_i topcluster, rvec_f TopResolved_TopScore, float threshold)
 {
   RVec<int> tagged;
 
@@ -916,7 +993,7 @@ RVec<int> RecoTaggedTopClusterResolved(rvec_rvec_i topcluster, rvec_f TopResolve
     int flag = 0;
     for(int j = 0; j < topcluster[i].size(); j++)
     {
-      if (TopResolved_TopScore[topcluster[i][j]] >= TopRes_trs)
+      if (TopResolved_TopScore[topcluster[i][j]] >= threshold)
       {
         flag =1;
       }
