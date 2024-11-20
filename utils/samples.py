@@ -273,7 +273,7 @@ WJetsHT2500toInf_2018.unix_code = 21207
 
 WJets_2018 = sample(ROOT.kGreen-3, 1, 1001, "W + Jets", "WJets_2018")
 WJets_2018.year = 2018
-WJets_2018.components = [WJetsHT70to100_2018, 
+WJets_2018.components = [#WJetsHT70to100_2018, 
                          WJetsHT100to200_2018, WJetsHT200to400_2018, 
                          WJetsHT400to600_2018, WJetsHT600to800_2018, 
                          WJetsHT800to1200_2018, WJetsHT1200to2500_2018, 
@@ -322,6 +322,25 @@ TprimeToTZ_700_2018.dataset = '/TprimeBToTZ_M-700_LH_TuneCP5_PSweights_13TeV-mad
 TprimeToTZ_700_2018.unix_code = 22002
 # TprimeToTZ_700_2018.local_path = "/eos/home-a/acagnott/DarkMatter/topcandidate_file/"+TprimeToTZ_700_2018.label +"_Skim.root"
 
+###############################################################################################################################
+##########################################                                           ##########################################
+##########################################       samples for tagger studies          ##########################################
+##########################################                                           ##########################################
+###############################################################################################################################
+Zprime4top_500_2018          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M500GeV", "Zprime4top_500_2018")
+Zprime4top_500_2018.sigma    = 1 #pb
+Zprime4top_500_2018.year     = 2018
+Zprime4top_500_2018.dataset  = '/TTZprimeToTT_M-500_Width4_TuneCP5_13TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-500_Width4_nanoaod_hotvr_UL2018v1_230510-00000000000000000000000000000000/USER'
+
+Zprime4top_1000_2018          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M1000GeV", "Zprime4top_1000_2018")
+Zprime4top_1000_2018.sigma    = 1 #pb
+Zprime4top_1000_2018.year     = 2018
+Zprime4top_1000_2018.dataset  = '/TTZprimeToTT_M-1000_Width4_TuneCP5_13TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-1000_Width4_nanoaod_hotvr_UL2018v1_230510-00000000000000000000000000000000/USER'
+
+Zprime4top_2000_2018          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M2000GeV", "Zprime4top_2000_2018")
+Zprime4top_2000_2018.sigma    = 1 #pb
+Zprime4top_2000_2018.year     = 2018
+Zprime4top_2000_2018.dataset  = '/TTZprimeToTT_M-2000_Width4_TuneCP5_13TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-2000_Width4_nanoaod_hotvr_UL2018v1_230510-00000000000000000000000000000000/USER'
 
 ###############################################################################################################################
 ##########################################                                           ##########################################
@@ -353,7 +372,7 @@ QCD_HT100to200_2022.process     = "QCD_2022"
 QCD_HT100to200_2022.unix_code   = 31002
 QCD_HT100to200_2022.EE          = 0
 QCD_HT200to400_2022             = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT200to400_2022")
-QCD_HT200to400_2022.sigma       = 1.95*(10**6) #pb
+QCD_HT200to400_2022.sigma       = 1.96*(10**6) #pb
 QCD_HT200to400_2022.year        = 2022
 QCD_HT200to400_2022.dataset     = "/QCD-4Jets_HT-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM"
 QCD_HT200to400_2022.process     = "QCD_2022"
@@ -374,21 +393,21 @@ QCD_HT600to800_2022.process     = "QCD_2022"
 QCD_HT600to800_2022.unix_code   = 31005
 QCD_HT600to800_2022.EE          = 0
 QCD_HT800to1000_2022            = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT800to1000_2022")
-QCD_HT800to1000_2022.sigma      = 3.02*(10**3) #pb
+QCD_HT800to1000_2022.sigma      = 3.03*(10**3) #pb
 QCD_HT800to1000_2022.year       = 2022
 QCD_HT800to1000_2022.dataset    = "/QCD-4Jets_HT-800to1000_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM"
 QCD_HT800to1000_2022.process    = "QCD_2022"
 QCD_HT800to1000_2022.unix_code  = 31006
 QCD_HT800to1000_2022.EE         = 0
 QCD_HT1000to1200_2022           = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT1000to1200_2022")
-QCD_HT1000to1200_2022.sigma     = 881.4 #pb
+QCD_HT1000to1200_2022.sigma     = 884 #pb
 QCD_HT1000to1200_2022.year      = 2022
 QCD_HT1000to1200_2022.dataset   = "/QCD-4Jets_HT-1000to1200_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM"
 QCD_HT1000to1200_2022.process   = "QCD_2022"
 QCD_HT1000to1200_2022.unix_code = 31007
 QCD_HT1000to1200_2022.EE        = 0
 QCD_HT1200to1500_2022           = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT1200to1500_2022")
-QCD_HT1200to1500_2022.sigma     = 381 #pb 
+QCD_HT1200to1500_2022.sigma     = 384 #pb 
 QCD_HT1200to1500_2022.year      = 2022
 QCD_HT1200to1500_2022.dataset   = "/QCD-4Jets_HT-1200to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM"
 QCD_HT1200to1500_2022.process   = "QCD_2022"
@@ -402,7 +421,7 @@ QCD_HT1500to2000_2022.process   = "QCD_2022"
 QCD_HT1500to2000_2022.unix_code = 31008
 QCD_HT1500to2000_2022.EE        = 0
 QCD_HT2000_2022                 = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT2000_2022")
-QCD_HT2000_2022.sigma           = 26.3 #pb
+QCD_HT2000_2022.sigma           = 26.5 #pb
 QCD_HT2000_2022.year            = 2022
 QCD_HT2000_2022.dataset         = "/QCD-4Jets_HT-2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM"
 QCD_HT2000_2022.process         = "QCD_2022"
@@ -697,23 +716,110 @@ WJets_2jets_2022.components  = [WJets_2jets0J_2022, WJets_2jets1J_2022, WJets_2j
 TprimeToTZ_700_2022           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M700GeV", "TprimeToTZ_700_2022")
 TprimeToTZ_700_2022.sigma     = 0.07804 #pb  # questa è 2018 non 2022
 TprimeToTZ_700_2022.year      = 2022
-TprimeToTZ_700_2022.dataset   = '/TprimeBtoTZ_M-700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v3/NANOAODSIM'
+TprimeToTZ_700_2022.dataset   = '/TprimeBtoTZ_M-700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM'
 TprimeToTZ_700_2022.unix_code = 32000
 TprimeToTZ_700_2022.EE        = 0
 
-TprimeToTZ_1000_2022           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M700GeV", "TprimeToTZ_1000_2022")
+TprimeToTZ_800_2022           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M800GeV", "TprimeToTZ_800_2022")
+TprimeToTZ_800_2022.sigma     = 0.04155 #pb  # questa è 2018 non 2022
+TprimeToTZ_800_2022.year      = 2022
+TprimeToTZ_800_2022.dataset   = '/TprimeBtoTZ_M-800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM'
+TprimeToTZ_800_2022.unix_code = 32001
+TprimeToTZ_800_2022.EE        = 0
+
+TprimeToTZ_900_2022           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M900GeV", "TprimeToTZ_900_2022")
+TprimeToTZ_900_2022.sigma     = 0.02335 #pb  # questa è 2018 non 2022
+TprimeToTZ_900_2022.year      = 2022
+TprimeToTZ_900_2022.dataset   = '/TprimeBtoTZ_M-900_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM'
+TprimeToTZ_900_2022.unix_code = 32002
+TprimeToTZ_900_2022.EE        = 0
+
+TprimeToTZ_1000_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1000GeV", "TprimeToTZ_1000_2022")
 TprimeToTZ_1000_2022.sigma     = 0.01362 #pb  # questa è 2018 non 2022
 TprimeToTZ_1000_2022.year      = 2022
-TprimeToTZ_1000_2022.dataset   = '/TprimeBtoTZ_M-1000_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v3/NANOAODSIM' 
-TprimeToTZ_1000_2022.unix_code = 32001
+TprimeToTZ_1000_2022.dataset   = '/TprimeBtoTZ_M-1000_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1000_2022.unix_code = 32003
 TprimeToTZ_1000_2022.EE        = 0
 
+TprimeToTZ_1100_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1100GeV", "TprimeToTZ_1100_2022")
+TprimeToTZ_1100_2022.sigma     = 0.008228 #pb  # questa è 2018 non 2022
+TprimeToTZ_1100_2022.year      = 2022
+TprimeToTZ_1100_2022.dataset   = '/TprimeBtoTZ_M-1100_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1100_2022.unix_code = 32003
+TprimeToTZ_1100_2022.EE        = 0
+
+TprimeToTZ_1200_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1200GeV", "TprimeToTZ_1200_2022")
+TprimeToTZ_1200_2022.sigma     = 0.005113 #pb  # questa è 2018 non 2022
+TprimeToTZ_1200_2022.year      = 2022
+TprimeToTZ_1200_2022.dataset   = '/TprimeBtoTZ_M-1200_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1200_2022.unix_code = 32003
+TprimeToTZ_1200_2022.EE        = 0
+
+TprimeToTZ_1300_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1300GeV", "TprimeToTZ_1300_2022")
+TprimeToTZ_1300_2022.sigma     = 0.003256 #pb  # questa è 2018 non 2022
+TprimeToTZ_1300_2022.year      = 2022
+TprimeToTZ_1300_2022.dataset   = '/TprimeBtoTZ_M-1300_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1300_2022.unix_code = 32003
+TprimeToTZ_1300_2022.EE        = 0
+
+TprimeToTZ_1400_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1400GeV", "TprimeToTZ_1400_2022")
+TprimeToTZ_1400_2022.sigma     = 0.002121 #pb  # questa è 2018 non 2022
+TprimeToTZ_1400_2022.year      = 2022
+TprimeToTZ_1400_2022.dataset   = '/TprimeBtoTZ_M-1400_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1400_2022.unix_code = 32003
+TprimeToTZ_1400_2022.EE        = 0
+
+TprimeToTZ_1500_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1500GeV", "TprimeToTZ_1500_2022")
+TprimeToTZ_1500_2022.sigma     = 0.001407 #pb  # questa è 2018 non 2022
+TprimeToTZ_1500_2022.year      = 2022
+TprimeToTZ_1500_2022.dataset   = '/TprimeBtoTZ_M-1500_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1500_2022.unix_code = 32003
+TprimeToTZ_1500_2022.EE        = 0
+
+TprimeToTZ_1600_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1600GeV", "TprimeToTZ_1600_2022")
+TprimeToTZ_1600_2022.sigma     = 0.0009456 #pb  # questa è 2018 non 2022
+TprimeToTZ_1600_2022.year      = 2022
+TprimeToTZ_1600_2022.dataset   = '/TprimeBtoTZ_M-1600_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1600_2022.unix_code = 32003
+TprimeToTZ_1600_2022.EE        = 0
+
+TprimeToTZ_1700_2022           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1700GeV", "TprimeToTZ_1700_2022")
+TprimeToTZ_1700_2022.sigma     = 0.0006454 #pb  # questa è 2018 non 2022
+TprimeToTZ_1700_2022.year      = 2022
+TprimeToTZ_1700_2022.dataset   = '/TprimeBtoTZ_M-1700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM' 
+TprimeToTZ_1700_2022.unix_code = 32003
+TprimeToTZ_1700_2022.EE        = 0
+
 TprimeToTZ_1800_2022           = sample(ROOT.kGreen+4, 1, 1001, "T#rightarrow tZ M1800GeV", "TprimeToTZ_1800_2022")
-TprimeToTZ_1800_2022.sigma     = 0.00045 #pb
+TprimeToTZ_1800_2022.sigma     = 0.0004463 #pb
 TprimeToTZ_1800_2022.year      = 2022
-TprimeToTZ_1800_2022.dataset   = '/TprimeBtoTZ_M-1800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v3/NANOAODSIM'
+TprimeToTZ_1800_2022.dataset   = '/TprimeBtoTZ_M-1800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v4/NANOAODSIM'
 TprimeToTZ_1800_2022.unix_code = 22000
 TprimeToTZ_1800_2022.EE        = 0
+
+
+###############################################################################################################################
+##########################################                                           ##########################################
+##########################################       samples for tagger studies          ##########################################
+##########################################                                           ##########################################
+###############################################################################################################################
+Zprime4top_500_2022          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M500GeV", "Zprime4top_500_2022")
+Zprime4top_500_2022.sigma    = 1 #pb
+Zprime4top_500_2022.year     = 2022
+Zprime4top_500_2022.dataset  = '/TopPhilic_ttzp_13p6TeV_m500_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-500_Width4_nanoaod_hotvr_UL2022v1_230510-00000000000000000000000000000000/USER'
+Zprime4top_500_2022.EE       = 0
+
+Zprime4top_1000_2022          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M1000GeV", "Zprime4top_1000_2022")
+Zprime4top_1000_2022.sigma    = 1 #pb
+Zprime4top_1000_2022.year     = 2022
+Zprime4top_1000_2022.dataset  = '/TopPhilic_ttzp_13p6TeV_m1000_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-1000_Width4_nanoaod_hotvr_UL2022v1_230510-00000000000000000000000000000000/USER'
+Zprime4top_1000_2022.EE       = 0
+
+Zprime4top_2000_2022          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M2000GeV", "Zprime4top_2000_2022")
+Zprime4top_2000_2022.sigma    = 1 #pb
+Zprime4top_2000_2022.year     = 2022
+Zprime4top_2000_2022.dataset  = '/TopPhilic_ttzp_13p6TeV_m2000_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-2000_Width4_nanoaod_hotvr_UL2022v1_230510-00000000000000000000000000000000/USER'
+Zprime4top_2000_2022.EE       = 0
 
 
 ###############################################################################################################################
@@ -751,7 +857,7 @@ QCD_HT100to200_2022EE.unix_code   = 41002
 QCD_HT100to200_2022EE.EE          = 1
 
 QCD_HT200to400_2022EE             = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT200to400_2022EE")
-QCD_HT200to400_2022EE.sigma       = 1.95*(10**6) #pb
+QCD_HT200to400_2022EE.sigma       = 1.96*(10**6) #pb
 QCD_HT200to400_2022EE.year        = 2022
 QCD_HT200to400_2022EE.dataset     = "/QCD-4Jets_HT-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM"
 QCD_HT200to400_2022EE.process     = "QCD_2022EE"
@@ -775,7 +881,7 @@ QCD_HT600to800_2022EE.unix_code   = 41005
 QCD_HT600to800_2022EE.EE          = 1
 
 QCD_HT800to1000_2022EE            = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT800to1000_2022EE")
-QCD_HT800to1000_2022EE.sigma      = 3.02*(10**3) #pb
+QCD_HT800to1000_2022EE.sigma      = 3.03*(10**3) #pb
 QCD_HT800to1000_2022EE.year       = 2022
 QCD_HT800to1000_2022EE.dataset    = "/QCD-4Jets_HT-800to1000_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM"
 QCD_HT800to1000_2022EE.process    = "QCD_2022EE"
@@ -783,7 +889,7 @@ QCD_HT800to1000_2022EE.unix_code  = 41006
 QCD_HT800to1000_2022EE.EE         = 1
 
 QCD_HT1000to1200_2022EE           = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT1000to1200_2022EE")
-QCD_HT1000to1200_2022EE.sigma     = 881 #pb
+QCD_HT1000to1200_2022EE.sigma     = 884 #pb
 QCD_HT1000to1200_2022EE.year      = 2022
 QCD_HT1000to1200_2022EE.dataset   = "/QCD-4Jets_HT-1000to1200_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM"
 QCD_HT1000to1200_2022EE.process   = "QCD_2022EE"
@@ -791,7 +897,7 @@ QCD_HT1000to1200_2022EE.unix_code = 41007
 QCD_HT1000to1200_2022EE.EE        = 1
 
 QCD_HT1200to1500_2022EE           = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT1200to1500_2022EE")
-QCD_HT1200to1500_2022EE.sigma     = 381 #pb
+QCD_HT1200to1500_2022EE.sigma     = 384 #pb
 QCD_HT1200to1500_2022EE.year      = 2022
 QCD_HT1200to1500_2022EE.dataset   = "/QCD-4Jets_HT-1200to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM"
 QCD_HT1200to1500_2022EE.process   = "QCD_2022EE"
@@ -807,7 +913,7 @@ QCD_HT1500to2000_2022EE.unix_code = 41008
 QCD_HT1500to2000_2022EE.EE        = 1
 
 QCD_HT2000_2022EE                 = sample(ROOT.kGray, 1, 1001, "QCD", "QCD_HT2000_2022EE")
-QCD_HT2000_2022EE.sigma           = 26.3 #pb
+QCD_HT2000_2022EE.sigma           = 26.5 #pb
 QCD_HT2000_2022EE.year            = 2022
 QCD_HT2000_2022EE.dataset         = "/QCD-4Jets_HT-2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM"
 QCD_HT2000_2022EE.process         = "QCD_2022EE"
@@ -906,6 +1012,100 @@ ZJetsToNuNu_2022EE.components             = [
                                             ZJetsToNuNu_HT800to1500_2022EE, ZJetsToNuNu_HT1500to2500_2022EE, ZJetsToNuNu_HT2500_2022EE 
                                             ]
 
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT40to100_1J_2022EE")
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.sigma      = 929.8	
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM"
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.process    = 'ZJetsToNuNu_2jets_2022EE'
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.unix_code  = 41207
+ZJetsToNuNu_2jets_PT40to100_1J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT100to200_1J_2022EE")
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.sigma      = 86.38
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM"
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.process    = 'ZJetsToNuNu_2jets_2022EE'
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.unix_code  = 41208
+ZJetsToNuNu_2jets_PT100to200_1J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT200to400_1J_2022EE")
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.sigma      = 6.354	
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM"
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.process    = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.unix_code  = 41209
+ZJetsToNuNu_2jets_PT200to400_1J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT400to600_1J_2022EE")
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.sigma      = 0.2188
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM"
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.process    = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.unix_code  = 41210
+ZJetsToNuNu_2jets_PT400to600_1J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT600_1J_2022EE                 = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT600_1J_2022EE")
+ZJetsToNuNu_2jets_PT600_1J_2022EE.sigma           = 0.02583
+ZJetsToNuNu_2jets_PT600_1J_2022EE.year            = 2022
+ZJetsToNuNu_2jets_PT600_1J_2022EE.dataset         = "/Zto2Nu-2Jets_PTNuNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM"
+ZJetsToNuNu_2jets_PT600_1J_2022EE.process         = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT600_1J_2022EE.unix_code       = 41211
+ZJetsToNuNu_2jets_PT600_1J_2022EE.EE              = 1
+
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE             = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT40to100_2J_2022EE")
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.sigma       = 335.5
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.year        = 2022
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.dataset     = "/Zto2Nu-2Jets_PTNuNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM"
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.process     = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.unix_code   = 41212
+ZJetsToNuNu_2jets_PT40to100_2J_2022EE.EE          = 1
+
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT100to200_2J_2022EE")
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.sigma      = 100.4
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM"
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.process    = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.unix_code  = 41213
+ZJetsToNuNu_2jets_PT100to200_2J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT200to400_2J_2022EE")
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.sigma      = 13.86
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM"
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.process    = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.unix_code  = 41214
+ZJetsToNuNu_2jets_PT200to400_2J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE            = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT400to600_2J_2022EE")
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.sigma      = 0.7816
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.year       = 2022
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.dataset    = "/Zto2Nu-2Jets_PTNuNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM"
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.process    = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.unix_code  = 41215
+ZJetsToNuNu_2jets_PT400to600_2J_2022EE.EE         = 1
+
+ZJetsToNuNu_2jets_PT600_2J_2022EE                 = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_PT600_2J_2022EE")
+ZJetsToNuNu_2jets_PT600_2J_2022EE.sigma           = 0.1311
+ZJetsToNuNu_2jets_PT600_2J_2022EE.year            = 2022
+ZJetsToNuNu_2jets_PT600_2J_2022EE.dataset         = "/Zto2Nu-2Jets_PTNuNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM"
+ZJetsToNuNu_2jets_PT600_2J_2022EE.process         = 'ZJetsToNuNu_2jets_2022'
+ZJetsToNuNu_2jets_PT600_2J_2022EE.unix_code       = 41216
+ZJetsToNuNu_2jets_PT600_2J_2022EE.EE              = 1
+
+ZJetsToNuNu_2jets_2022EE = sample(ROOT.kAzure+6, 1, 1001, "ZJets #rightarrow #nu#nu", "ZJetsToNuNu_2jets_2022EE")
+ZJetsToNuNu_2jets_2022EE.year = 2022
+ZJetsToNuNu_2jets_2022EE.components = [
+                                        ZJetsToNuNu_2jets_PT40to100_1J_2022EE,
+                                        ZJetsToNuNu_2jets_PT100to200_1J_2022EE,
+                                        ZJetsToNuNu_2jets_PT200to400_1J_2022EE,
+                                        ZJetsToNuNu_2jets_PT400to600_1J_2022EE,
+                                        ZJetsToNuNu_2jets_PT600_1J_2022EE,
+                                        ZJetsToNuNu_2jets_PT40to100_2J_2022EE,
+                                        ZJetsToNuNu_2jets_PT100to200_2J_2022EE,
+                                        ZJetsToNuNu_2jets_PT200to400_2J_2022EE,
+                                        ZJetsToNuNu_2jets_PT400to600_2J_2022EE,
+                                        ZJetsToNuNu_2jets_PT600_2J_2022EE
+                                    ]
 ################################ WJets ################################
 
 WJets_HT120to200_2022EE               = sample(ROOT.kGreen-3, 1, 1001, "W + Jets", "WJets_HT120to200_2022EE") 
@@ -1009,46 +1209,116 @@ WJets_2jets_2022EE.components  = [WJets_2jets0J_2022EE, WJets_2jets1J_2022EE, WJ
 TprimeToTZ_700_2022EE           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M700GeV", "TprimeToTZ_700_2022EE")
 TprimeToTZ_700_2022EE.sigma     = 0.07804 #pb  # questa è 2018 non 2022
 TprimeToTZ_700_2022EE.year      = 2022
-TprimeToTZ_700_2022EE.dataset   = '/TprimeBtoTZ_M-700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM'
+TprimeToTZ_700_2022EE.dataset   = '/TprimeBtoTZ_M-700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM'
 TprimeToTZ_700_2022EE.unix_code = 42000
 TprimeToTZ_700_2022EE.EE        = 1
 
-TprimeToTZ_1000_2022EE           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M700GeV", "TprimeToTZ_1000_2022EE")
+TprimeToTZ_800_2022EE           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M800GeV", "TprimeToTZ_800_2022EE")
+TprimeToTZ_800_2022EE.sigma     = 0.041545 #pb  # questa è 2018 non 2022
+TprimeToTZ_800_2022EE.year      = 2022
+TprimeToTZ_800_2022EE.dataset   = '/TprimeBtoTZ_M-800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM'
+TprimeToTZ_800_2022EE.unix_code = 42000
+TprimeToTZ_800_2022EE.EE        = 1
+
+TprimeToTZ_900_2022EE           = sample(ROOT.kGreen, 1, 1001, "T#rightarrow tZ M900GeV", "TprimeToTZ_900_2022EE")
+TprimeToTZ_900_2022EE.sigma     = 0.023345 #pb  # questa è 2018 non 2022
+TprimeToTZ_900_2022EE.year      = 2022
+TprimeToTZ_900_2022EE.dataset   = '/TprimeBtoTZ_M-900_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM'
+TprimeToTZ_900_2022EE.unix_code = 42000
+TprimeToTZ_900_2022EE.EE        = 1
+
+TprimeToTZ_1000_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1000GeV", "TprimeToTZ_1000_2022EE")
 TprimeToTZ_1000_2022EE.sigma     = 0.01362 #pb  # questa è 2018 non 2022
 TprimeToTZ_1000_2022EE.year      = 2022
-TprimeToTZ_1000_2022EE.dataset   = '/TprimeBtoTZ_M-1000_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM' 
+TprimeToTZ_1000_2022EE.dataset   = '/TprimeBtoTZ_M-1000_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
 TprimeToTZ_1000_2022EE.unix_code = 42001
 TprimeToTZ_1000_2022EE.EE        = 1
 
+TprimeToTZ_1100_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1100GeV", "TprimeToTZ_1100_2022EE")
+TprimeToTZ_1100_2022EE.sigma     = 0.008228 #pb  # questa è 2018 non 2022
+TprimeToTZ_1100_2022EE.year      = 2022
+TprimeToTZ_1100_2022EE.dataset   = '/TprimeBtoTZ_M-1100_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1100_2022EE.unix_code = 42001
+TprimeToTZ_1100_2022EE.EE        = 1
+
+TprimeToTZ_1200_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1200GeV", "TprimeToTZ_1200_2022EE")
+TprimeToTZ_1200_2022EE.sigma     = 0.005113 #pb  # questa è 2018 non 2022
+TprimeToTZ_1200_2022EE.year      = 2022
+TprimeToTZ_1200_2022EE.dataset   = '/TprimeBtoTZ_M-1200_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1200_2022EE.unix_code = 42001
+TprimeToTZ_1200_2022EE.EE        = 1
+
+TprimeToTZ_1300_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1300GeV", "TprimeToTZ_1300_2022EE")
+TprimeToTZ_1300_2022EE.sigma     = 0.003256 #pb  # questa è 2018 non 2022
+TprimeToTZ_1300_2022EE.year      = 2022
+TprimeToTZ_1300_2022EE.dataset   = '/TprimeBtoTZ_M-1300_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1300_2022EE.unix_code = 42001
+TprimeToTZ_1300_2022EE.EE        = 1
+
+TprimeToTZ_1400_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1400GeV", "TprimeToTZ_1400_2022EE")
+TprimeToTZ_1400_2022EE.sigma     = 0.002121 #pb  # questa è 2018 non 2022
+TprimeToTZ_1400_2022EE.year      = 2022
+TprimeToTZ_1400_2022EE.dataset   = '/TprimeBtoTZ_M-1400_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1400_2022EE.unix_code = 42001
+TprimeToTZ_1400_2022EE.EE        = 1
+
+TprimeToTZ_1500_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1500GeV", "TprimeToTZ_1500_2022EE")
+TprimeToTZ_1500_2022EE.sigma     = 0.001407 #pb  # questa è 2018 non 2022
+TprimeToTZ_1500_2022EE.year      = 2022
+TprimeToTZ_1500_2022EE.dataset   = '/TprimeBtoTZ_M-1500_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1500_2022EE.unix_code = 42001
+TprimeToTZ_1500_2022EE.EE        = 1
+
+TprimeToTZ_1600_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1600GeV", "TprimeToTZ_1600_2022EE")
+TprimeToTZ_1600_2022EE.sigma     = 0.0008456 #pb  # questa è 2018 non 2022
+TprimeToTZ_1600_2022EE.year      = 2022
+TprimeToTZ_1600_2022EE.dataset   = '/TprimeBtoTZ_M-1600_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1600_2022EE.unix_code = 42001
+TprimeToTZ_1600_2022EE.EE        = 1
+
+TprimeToTZ_1700_2022EE           = sample(ROOT.kGreen+2, 1, 1001, "T#rightarrow tZ M1700GeV", "TprimeToTZ_1700_2022EE")
+TprimeToTZ_1700_2022EE.sigma     = 0.0006454 #pb  # questa è 2018 non 2022
+TprimeToTZ_1700_2022EE.year      = 2022
+TprimeToTZ_1700_2022EE.dataset   = '/TprimeBtoTZ_M-1700_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM' 
+TprimeToTZ_1700_2022EE.unix_code = 42001
+TprimeToTZ_1700_2022EE.EE        = 1
+
 TprimeToTZ_1800_2022EE           = sample(ROOT.kGreen+4, 1, 1001, "T#rightarrow tZ M1800GeV", "TprimeToTZ_1800_2022EE")
-TprimeToTZ_1800_2022EE.sigma     = 0.00045 #pb
+TprimeToTZ_1800_2022EE.sigma     = 0.0004463 #pb
 TprimeToTZ_1800_2022EE.year      = 2022
-TprimeToTZ_1800_2022EE.dataset   = '/TprimeBtoTZ_M-1800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/NANOAODSIM'
+TprimeToTZ_1800_2022EE.dataset   = '/TprimeBtoTZ_M-1800_LH_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v4/NANOAODSIM'
 TprimeToTZ_1800_2022EE.unix_code = 42002
 TprimeToTZ_1800_2022EE.EE        = 1
 
-##################################################################################
-########################### DATA 2016 ############################################
-##################################################################################
+###############################################################################################################################
+##########################################                                           ##########################################
+##########################################       samples for tagger studies          ##########################################
+##########################################                                           ##########################################
+###############################################################################################################################
+Zprime4top_500_2022EE          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M500GeV", "Zprime4top_500_2022EE")
+Zprime4top_500_2022EE.sigma    = 1 #pb
+Zprime4top_500_2022EE.year     = 2022
+Zprime4top_500_2022EE.dataset  = '/TopPhilic_ttzp_13p6TeV_m500_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-500_Width4_nanoaod_hotvr_UL2022_EEv1_230510-00000000000000000000000000000000/USER'
+Zprime4top_500_2022EE.EE       = 1
 
-DataHTH_2016           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTH_2016")  #8.6fb
-DataHTH_2016.runP      = 'H'
-DataHTH_2016.year      = 2016
-DataHTH_2016.dataset   = '/MET/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'
-# DataHTH_2016.unix_code = 
+Zprime4top_1000_2022EE          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M1000GeV", "Zprime4top_1000_2022EE")
+Zprime4top_1000_2022EE.sigma    = 1 #pb
+Zprime4top_1000_2022EE.year     = 2022
+Zprime4top_1000_2022EE.dataset  = '/TopPhilic_ttzp_13p6TeV_m1000_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-1000_Width4_nanoaod_hotvr_UL2022_EEv1_230510-00000000000000000000000000000000/USER'
+Zprime4top_1000_2022EE.EE       = 1
 
-################### DA ELIMINARE QUANDO ABBIAMO LA VERSIONE NUOVA DA CRAB
-
-# DataHTA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataHTA_2018")
-# DataHTA_2018.runP      = 'A'
-# DataHTA_2018.year      = 2018
-# DataHTA_2018.dataset   = '/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD' #'/MET/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD'
-# DataHTA_2018.process   = "DataMET_2018"
-# DataHTA_2018.unix_code = 20000
+Zprime4top_2000_2022EE          = sample(ROOT.kGreen+2, 1, 1001, "Zprime4top M2000GeV", "Zprime4top_2000_2022EE")
+Zprime4top_2000_2022EE.sigma    = 1 #pb
+Zprime4top_2000_2022EE.year     = 2022
+Zprime4top_2000_2022EE.dataset  = '/TopPhilic_ttzp_13p6TeV_m2000_relwidth4_TuneCP5_13p6TeV-madgraph-pythia8/gmilella-crab_TTZprimeToTT_M-2000_Width4_nanoaod_hotvr_UL2022_EEv1_230510-00000000000000000000000000000000/USER'
+Zprime4top_2000_2022EE.EE       = 1
 
 
 
+
+###############################################################################################################################
 ########################### DATA 2018 ############################################
+###############################################################################################################################
 DataMETA_2018           = sample(ROOT.kBlack, 1, 1001, "Data", "DataMETA_2018")
 DataMETA_2018.runP      = 'A'
 DataMETA_2018.year      = 2018
@@ -1254,7 +1524,6 @@ sample_dict = {
     # 'DataHTA_2018': DataHTA_2018,
 
     ################################## RUN II
-    'DataHTH_2016': DataHTH_2016,
     # Data MET 2018   
     'DataMET_2018': DataMET_2018, 'DataMETA_2018': DataMETA_2018, 'DataMETB_2018': DataMETB_2018,
     'DataMETC_2018': DataMETC_2018, 'DataMETD_2018': DataMETD_2018, 
@@ -1287,6 +1556,9 @@ sample_dict = {
     'TprimeToTZ_700_2018' : TprimeToTZ_700_2018,
 
     'tDM_mPhi50_mChi1_2018' : tDM_mPhi50_mChi1_2018, 'tDM_mPhi500_mChi1_2018' : tDM_mPhi500_mChi1_2018, 'tDM_mPhi1000_mChi1_2018' : tDM_mPhi1000_mChi1_2018,
+    
+
+    "Zprime4top_500_2018":Zprime4top_500_2018, "Zprime4top_1000_2018":Zprime4top_1000_2018, "Zprime4top_2000_2018":Zprime4top_2000_2018, 
     
     #######################################
     ############# RUN III ################
@@ -1327,8 +1599,20 @@ sample_dict = {
                                     
     ########## SIGNALS
     "TprimeToTZ_700_2022":TprimeToTZ_700_2022,
+    "TprimeToTZ_800_2022":TprimeToTZ_800_2022,
+    "TprimeToTZ_900_2022":TprimeToTZ_900_2022,
     "TprimeToTZ_1000_2022":TprimeToTZ_1000_2022,
+    "TprimeToTZ_1100_2022":TprimeToTZ_1100_2022,
+    "TprimeToTZ_1200_2022":TprimeToTZ_1200_2022,
+    "TprimeToTZ_1300_2022":TprimeToTZ_1300_2022,
+    "TprimeToTZ_1400_2022":TprimeToTZ_1400_2022,
+    "TprimeToTZ_1500_2022":TprimeToTZ_1500_2022,
+    "TprimeToTZ_1600_2022":TprimeToTZ_1600_2022,
+    "TprimeToTZ_1700_2022":TprimeToTZ_1700_2022,
     "TprimeToTZ_1800_2022":TprimeToTZ_1800_2022,
+
+    #####################Tagger studies 4 top samples
+    "Zprime4top_500_2022" : Zprime4top_500_2022, "Zprime4top_1000_2022" : Zprime4top_1000_2022, "Zprime4top_2000_2022" : Zprime4top_2000_2022,
 
     #####################2022EE
     ############ QCD
@@ -1355,10 +1639,29 @@ sample_dict = {
     "ZJetsToNuNu_HT200to400_2022EE":ZJetsToNuNu_HT200to400_2022EE, "ZJetsToNuNu_HT400to800_2022EE":ZJetsToNuNu_HT400to800_2022EE, 
     "ZJetsToNuNu_HT800to1500_2022EE":ZJetsToNuNu_HT800to1500_2022EE, "ZJetsToNuNu_HT1500to2500_2022EE":ZJetsToNuNu_HT1500to2500_2022EE, 
     "ZJetsToNuNu_HT2500_2022EE":ZJetsToNuNu_HT2500_2022EE,
+
+    "ZJetsToNuNu_2jets_2022EE":ZJetsToNuNu_2jets_2022EE,
+    "ZJetsToNuNu_2jets_PT40to100_1J_2022EE":ZJetsToNuNu_2jets_PT40to100_1J_2022EE, "ZJetsToNuNu_2jets_PT100to200_1J_2022EE":ZJetsToNuNu_2jets_PT100to200_1J_2022EE,
+    "ZJetsToNuNu_2jets_PT200to400_1J_2022EE":ZJetsToNuNu_2jets_PT200to400_1J_2022EE, "ZJetsToNuNu_2jets_PT400to600_1J_2022EE":ZJetsToNuNu_2jets_PT400to600_1J_2022EE,
+    "ZJetsToNuNu_2jets_PT600_1J_2022EE":ZJetsToNuNu_2jets_PT600_1J_2022EE, "ZJetsToNuNu_2jets_PT40to100_2J_2022EE":ZJetsToNuNu_2jets_PT40to100_2J_2022EE,
+    "ZJetsToNuNu_2jets_PT100to200_2J_2022EE":ZJetsToNuNu_2jets_PT100to200_2J_2022EE, "ZJetsToNuNu_2jets_PT200to400_2J_2022EE":ZJetsToNuNu_2jets_PT200to400_2J_2022EE,
+    "ZJetsToNuNu_2jets_PT400to600_2J_2022EE":ZJetsToNuNu_2jets_PT400to600_2J_2022EE, "ZJetsToNuNu_2jets_PT600_2J_2022EE":ZJetsToNuNu_2jets_PT600_2J_2022EE,
     ########## SIGNALS
     "TprimeToTZ_700_2022EE":TprimeToTZ_700_2022EE,
+    "TprimeToTZ_800_2022EE":TprimeToTZ_800_2022EE,
+    "TprimeToTZ_900_2022EE":TprimeToTZ_900_2022EE,
     "TprimeToTZ_1000_2022EE":TprimeToTZ_1000_2022EE,
+    "TprimeToTZ_1100_2022EE":TprimeToTZ_1100_2022EE,
+    "TprimeToTZ_1200_2022EE":TprimeToTZ_1200_2022EE,
+    "TprimeToTZ_1300_2022EE":TprimeToTZ_1300_2022EE,
+    "TprimeToTZ_1400_2022EE":TprimeToTZ_1400_2022EE,
+    "TprimeToTZ_1500_2022EE":TprimeToTZ_1500_2022EE,
+    "TprimeToTZ_1600_2022EE":TprimeToTZ_1600_2022EE,
+    "TprimeToTZ_1700_2022EE":TprimeToTZ_1700_2022EE,
     "TprimeToTZ_1800_2022EE":TprimeToTZ_1800_2022EE,
+
+    #####################Tagger studies 4 top samples
+    "Zprime4top_500_2022EE" : Zprime4top_500_2022EE, "Zprime4top_1000_2022EE" : Zprime4top_1000_2022EE, "Zprime4top_2000_2022EE" : Zprime4top_2000_2022EE,
 
     ############################################# DATA 
     'DataJetMET_2022': DataJetMET_2022, 'DataJetMETC_2022':DataJetMETC_2022, 'DataJetMETD_2022':DataJetMETD_2022, 
