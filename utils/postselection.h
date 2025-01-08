@@ -23,7 +23,7 @@ using rvec_rvec_i = const RVec<RVec<int>> &;
 
 const float TopRes_trs=  0.5411276;
 const float TopMix_trs=  0.7584613561630249;
-const float TopMer_trs=  0.94;
+const float TopMer_trs=  0.8;//0.94; 0.8 for 2022 correspond to fpr 6% on ttbar
 const float dR=  0.8;
 
 const float btagDeepB_mediumWP_2018   = 0.2783;
@@ -127,6 +127,101 @@ bool tt_mtt_doublecounting(rvec_f GenPart_pdgId, rvec_f GenPart_pt, rvec_f GenPa
   }
   return pass;
 }
+
+
+// ########################################################
+// ############## NLO EW correction #######################
+// ########################################################
+
+// sto usando lower_bound quindi quando il pt si trova tra due chiavi prende quella maggiore:
+// es. pt = 75 -> prende 100
+// quindi prima chiave a 50 avrà la correzione 0-50, seconda chiave a 100 avrà la correzione 50-100
+// e così via
+
+
+float getZPtCorrection(float zPt, std::map<float, float> zPtCorrectionMap) {
+  auto it = zPtCorrectionMap.lower_bound(zPt);
+  if (it == zPtCorrectionMap.end()) {
+    return 1.0; // Default correction if zPt is out of range
+  }
+  return it->second;
+}
+
+float nloewcorrectionZ(float w_nom, rvec_i genpart_pdg, rvec_f genpart_pt, rvec_i genpart_statusFlags)
+{ 
+    std::map<float, float> zPtCorrectionMap = {
+    {100.0,  0.99},
+    {200.0,  0.97},
+    {300.0,  0.95},
+    {400.0,  0.92},
+    {500.0,  0.90},
+    {600.0,  0.88},
+    {700.0,  0.86},
+    {800.0,  0.84},
+    {900.0,  0.83},
+    {1000.0, 0.81},
+    {1100.0, 0.80},
+    {1200.0, 0.78},
+    {1300.0, 0.77},
+    {1400.0, 0.76},
+    {1500.0, 0.75},
+    {1600.0, 0.74},
+    {1700.0, 0.73},
+    {1800.0, 0.72},
+    {1900.0, 0.71},
+    {2000.0, 0.70}
+  }; 
+  float w_final;
+  float zpart_pt=0;
+  for(int i = 0; i<genpart_pt.size();i++)
+  {
+    if(abs(genpart_pdg[i])==23 && (genpart_statusFlags[i] & 1<<13))
+    {
+      zpart_pt = genpart_pt[i];
+    }
+  }
+  float zptcorr = getZPtCorrection(zpart_pt, zPtCorrectionMap);
+  w_final = w_nom*zptcorr;
+  return w_final;
+}  
+
+float nloewcorrectionW(float w_nom, rvec_i genpart_pdg, rvec_f genpart_pt, rvec_i genpart_statusFlags)
+{  
+  std::map<float, float> wPtCorrectionMap = {
+    {100.0,  0.99},
+    {200.0,  0.97},
+    {300.0,  0.93},
+    {400.0,  0.90},
+    {500.0,  0.87},
+    {600.0,  0.85},
+    {700.0,  0.82},
+    {800.0,  0.80},
+    {900.0,  0.78},
+    {1000.0, 0.76},
+    {1100.0, 0.74},
+    {1200.0, 0.72},
+    {1300.0, 0.71},
+    {1400.0, 0.69},
+    {1500.0, 0.68},
+    {1600.0, 0.67},
+    {1700.0, 0.65},
+    {1800.0, 0.64},
+    {1900.0, 0.63},
+    {2000.0, 0.62}
+  };  
+  float w_final;
+  float wpart_pt=0;
+  for(int i = 0; i<genpart_pt.size();i++)
+  {
+    if(abs(genpart_pdg[i])==24 && (genpart_statusFlags[i] & 1<<13))
+    {
+      wpart_pt = genpart_pt[i];
+    }
+  }
+  float wptcorr = getZPtCorrection(wpart_pt, wPtCorrectionMap);
+  w_final = w_nom*wptcorr;
+  return w_final;
+}  
 
 // ########################################################
 // ############## MET_HLT_filter ##########################
@@ -720,7 +815,7 @@ bool check_same_top(int idx_fj_1, int idx_j0_1, int idx_j1_1, int idx_j2_1, int 
   
   bool check_jets = !intersection.empty();
 
-  bool check_fj = (idx_fj_1 == idx_fj_2)||(idx_fj_1 == -1 || idx_fj_2 == -1);
+  bool check_fj = (idx_fj_1 == idx_fj_2) && (idx_fj_1 != -1 && idx_fj_2 != -1);
   
   return check_jets || check_fj;
 }
@@ -866,7 +961,23 @@ Int_t select_TopCategory(rvec_i GoodTopMer_idx, rvec_i GoodTopMix_idx, rvec_i Go
   else if (nRes==0 && nMix<=1 && nMer==1){
     return 3;
   }
-  else return 4;
+  // else return 4;
+  else if (nMer>=1)
+  {
+     return 4;
+  }
+  else if (nMix>=1) 
+  {
+    return 5;
+  }
+  else if (nRes>=1) 
+  {
+    return 6;
+  }
+  else 
+  {
+    return 7;
+  }
 }
 
 Int_t select_bestTop(int EventTopCategory, rvec_f FatJet_particleNet_TvsQCD, rvec_f TopMixed_TopScore, rvec_f TopResolved_TopScore){
@@ -896,8 +1007,58 @@ Int_t select_bestTop(int EventTopCategory, rvec_f FatJet_particleNet_TvsQCD, rve
     } 
     idx = ArgMax(scores);
   }
-  else idx = -1;
-
+  else if (EventTopCategory==4){
+    for(int i = 0; i < FatJet_particleNet_TvsQCD.size(); i++)
+    {
+      scores.emplace_back(FatJet_particleNet_TvsQCD[i]);
+    }
+    idx = ArgMax(scores);    
+  }
+  else if (EventTopCategory==5){
+    for(int i = 0; i < TopMixed_TopScore.size(); i++)
+    {
+      scores.emplace_back(TopMixed_TopScore[i]);
+    }
+    idx = ArgMax(scores); 
+  }
+  else if (EventTopCategory==6){
+    for(int i = 0; i < TopResolved_TopScore.size(); i++)
+    {
+      scores.emplace_back(TopResolved_TopScore[i]);
+    } 
+    idx = ArgMax(scores);
+  }
+  else 
+  {
+    if (TopMixed_TopScore.size()>0)
+    {      
+      for(int i = 0; i < TopMixed_TopScore.size(); i++)
+      {
+        scores.emplace_back(TopMixed_TopScore[i]);
+      }
+      idx = ArgMax(scores); 
+    }
+    else if (TopResolved_TopScore.size()>0)
+    {
+      for(int i = 0; i < TopResolved_TopScore.size(); i++)
+      {
+        scores.emplace_back(TopResolved_TopScore[i]);
+      } 
+      idx = ArgMax(scores);
+    }
+    else if (FatJet_particleNet_TvsQCD.size()>0)
+    {
+      for(int i = 0; i < FatJet_particleNet_TvsQCD.size(); i++)
+      {
+        scores.emplace_back(FatJet_particleNet_TvsQCD[i]);
+      }
+      idx = ArgMax(scores);
+    }
+    else
+    {
+      idx = -1;
+    }
+  }
   return idx;
 }
 
@@ -906,7 +1067,17 @@ Float_t select_TopVar(Int_t EventTopCategory, Int_t Top_idx, rvec_f FatJet_pt, r
   if (EventTopCategory==1) return TopResolved_pt[Top_idx];
   else if (EventTopCategory==2) return TopMixed_pt[Top_idx];
   else if (EventTopCategory==3) return FatJet_pt[Top_idx];
-  else return -1000;
+  else if (EventTopCategory==4) return FatJet_pt[Top_idx];
+  else if (EventTopCategory==5) return TopMixed_pt[Top_idx];
+  else if (EventTopCategory==6) return TopResolved_pt[Top_idx];
+  else if (EventTopCategory==7) 
+  {
+    if (TopMixed_pt.size()>0) return TopMixed_pt[Top_idx];
+    else if (TopResolved_pt.size()>0) return TopResolved_pt[Top_idx];
+    else if (FatJet_pt.size()>0) return FatJet_pt[Top_idx];
+    else return -10000.0;
+  }
+  else return -10000.0;
 }
 
 // ########################################################
